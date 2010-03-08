@@ -4,8 +4,13 @@
 <title>Документ без имени</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link href="message_editor.css" rel="stylesheet" type="text/css" />
+  <script language="JavaScript" type="text/javascript" src="message_editor.js"></script>
 </head>
 <body>
+  <script language="javascript" type="text/javascript">
+      var editor = new MessageEditor();
+  </script>
+  
   <form action="http://google.com" method="post">
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
@@ -23,18 +28,68 @@
       </tr>
       
       <tr>
-        <td class="controls_cell">&nbsp;</td>
+        <td class="controls_cell">Smilies: 
+		  <img src="../../images/smilies/icon_arrow.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':arrow:' );" />
+		  <img src="../../images/smilies/icon_biggrin.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':D' );" />
+		  <img src="../../images/smilies/icon_confused.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':?' );" />
+		  <img src="../../images/smilies/icon_cool.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( '8)' );" />
+		  <img src="../../images/smilies/icon_cry.gif" width="15" height="15"
+		       onclick="javascipt: editor.addSmileToMessage( ':cry:' );" />
+		  <img src="../../images/smilies/icon_eek.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( '8O' );" />
+		  <img src="../../images/smilies/icon_evil.gif" width="15" height="15"
+		       onclick="javascipt: editor.addSmileToMessage( ':evil:' );" />
+		  <img src="../../images/smilies/icon_exclaim.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':!:' );" />
+		  <img src="../../images/smilies/icon_frown.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':(' );" />
+		  <img src="../../images/smilies/icon_idea.gif" width="15" height="15"
+		       onclick="javascipt: editor.addSmileToMessage( ':idea:' );"  />
+		  <img src="../../images/smilies/icon_lol.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':lol:' );" />
+		  <img src="../../images/smilies/icon_mad.gif" width="15" height="15"
+		       onclick="javascipt: editor.addSmileToMessage( ':x' );" />
+		  <img src="../../images/smilies/icon_mrgreen.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':mrgreen:' );" />
+		  <img src="../../images/smilies/icon_neutral.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':|' );" />
+		  <img src="../../images/smilies/icon_question.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':?:' );" />
+		  <img src="../../images/smilies/icon_razz.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':P' );" />
+		  <img src="../../images/smilies/icon_redface.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':oops:' );" />
+		  <img src="../../images/smilies/icon_rolleyes.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':roll:' );" />
+		  <img src="../../images/smilies/icon_sad.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':(' );" />
+		  <img src="../../images/smilies/icon_smile.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':)' );" />
+		  <img src="../../images/smilies/icon_surprised.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':o' );" />
+		  <img src="../../images/smilies/icon_twisted.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ':twisted:' );" />
+		  <img src="../../images/smilies/icon_wink.gif" width="15" height="15" 
+		       onclick="javascipt: editor.addSmileToMessage( ';)' );" />
+		</td>
         <td rowspan="1" class="text_editor_cell" >
 		  <textarea name="message_area" cols="80" rows="10" wrap="virtual" id="message_area" 
 		            dir="ltr" lang="ru"></textarea>		
+          <script language="javascript" type="text/javascript">
+		      editor.setTextArea("message_area");
+		  </script>
 		</td>
 		<td class="controls_cell">&nbsp;</td>
-       </tr>
+      </tr>
 	  
 	   <tr>
         <td class="controls_cell" scope="col">&nbsp;</td>
         <td class="controls_cell" scope="col">&nbsp;</td>
-        <td width="5%" class="controls_cell" scope="col">&nbsp;</td>
+        <td class="controls_cell" scope="col">&nbsp;</td>
       </tr>
     </table>
   </form>  
