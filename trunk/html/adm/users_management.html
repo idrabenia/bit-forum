@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Панель управления пользователями</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="admin_panel.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<form id="form1" name="user1_check" method="post" action="">
+	<table class="options_table"  width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<th width="22%" class="parameter_name" scope="col"><b>Логин</b></th>
+		<th width="19%" class="parameter_name" scope="col"><div align="center"><b>Дата регистрации</b></div></th>
+		<th width="30%" class="parameter_name" scope="col">
+		  <div align="center"><b>Группа</b></div>		</th>
+		<th class="parameter_name" colspan="3" scope="col"><div align="center"><b>Настройки</b></div></th>
+	  </tr>
+	  <tr>
+		<th class="odd_table_row" scope="row">
+			  <input type="checkbox" name="user1_check" value="checkbox" id="checkbox" />
+			  <label for="checkbox">user1</label>		</th>
+		<td class="odd_table_row"><div align="center">10.02.2010</div></td>
+		<td class="odd_table_row"><div align="center">Администратор</div></td>
+		<td align="center" width="29%" class="odd_table_row">
+		  <div align="center"><img src="icon_user_profile.gif" alt="Профиль" width="72" height="20" 
+			  onclick="javascript: top.location.href='http://www.google.com'; " />		  </div></td>
+	  </tr>
+	  <tr>
+		<th class="not_odd_table_row" scope="row">
+			<input type="checkbox" name="user2_check" value="checkbox" id="checkbox2" />
+			<label for="checkbox2">user2</label>		</th>
+		<td class="not_odd_table_row"><div align="center">11.02.2010</div></td>
+		<td class="not_odd_table_row"><div align="center">Модератор</div></td>
+		<td class="not_odd_table_row">
+		  <div align="center"><img src="icon_user_profile.gif" alt="Профиль" width="72" height="20" 
+			  onclick="javascript: top.location.href='http://www.google.com'; " />		</div></td>
+	  </tr>
+	  <tr>
+		<th class="odd_table_row" scope="row">
+		  <input type="checkbox" name="user1_check2" value="checkbox" id="user1_check" />
+          <label for="user1_check">user3</label>		</th>
+		<td class="odd_table_row"><div align="center">10.02.2010</div></td>
+		<td class="odd_table_row"><div align="center">Пользователь</div></td>
+		<td align="center" class="odd_table_row">
+		  <div align="center"><img src="icon_user_profile.gif" alt="Профиль" width="72" height="20" 
+				  onclick="javascript: top.location.href='http://www.google.com'; " />		</div></td>
+	  </tr>
+	  <tr>
+		<th class="not_odd_table_row" scope="row">
+		  <input type="checkbox" name="user2_check2" value="checkbox" id="user2_check" />
+          <label for="user2_check">user4</label>		</th>
+		<td align="center" class="not_odd_table_row"><div align="center">11.02.2010</div></td>
+		<td align="center" class="not_odd_table_row"><div align="center">Пользователь</div></td>
+		<td align="center" class="not_odd_table_row">
+		  <div align="center"><img src="icon_user_profile.gif" alt="Профиль" width="72" height="20" 
+			  onclick="javascript: top.location.href='http://www.google.com'; " />		</div></td>
+	  </tr>
+	</table>
+</form>
+</body>
+</html>
