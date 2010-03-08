@@ -1,0 +1,13 @@
+.text_editor_cell {
+	text-align: center;
+	vertical-align: top;
+	background-color: #99CC33;
+	display: table-cell;
+}
+.controls_cell {
+	background-color: #99CC66;
+	text-align: left;
+	vertical-align: middle;
+	margin: 3px;
+	padding: 3px;
+}
