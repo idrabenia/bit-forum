@@ -1,0 +1,21 @@
+It's some recomendations for coding style.
+
+1) Recommended to use xhtml specification (http://ru.wikipedia.org/wiki/XHTML). 
+(http://www.orangehrm.com/wiki/index.php/HTML_Coding_Conventions)
+This specification used for merge XML and HTML. It necessary for use XML 
+parsers for HTML documents. For example,
+    <br>    <!-- Bad. Not xhtml. -->
+    <br />  <!-- OK. Single tag must have "/" on end. -->
+
+Tag attributes must have quotes. Example,
+    <body class=some_class >  <!-- Bad. Need to use quotes. -->
+    <body class="some_class" >
+
+2) To use in tags lower case. Example,
+    <BODY>  <!-- Bad. -->
+    <body>  <!-- OK. Lowercase used. -->
+
+3) To use Drupal PHP coding convention ( http://drupal.org/coding-standards ).
+4) To use Drupal Javascript coding convention ( http://drupal.org/node/172169 ).
+
+5) etc :)
