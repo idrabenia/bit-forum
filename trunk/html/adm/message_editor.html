@@ -23,62 +23,98 @@
 	  
       <tr>
         <td width="25%" class="controls_cell" scope="col">&nbsp;</td>
-        <td width="1%" class="controls_cell" scope="col">&nbsp;</td>
+        <td width="1%" class="controls_cell" scope="col"> 
+		  <input type="button" id="set_bold_button" value="B" title="Bold text" 
+		         onclick="javascript: editor.addTagsToMessage( '[b]', '[/b]' );" />
+		  <input type="button" id="set_italic_button" value="I" title="Italic text"  
+		         onclick="javascript: editor.addTagsToMessage( '[i]', '[/i]' );" />
+		  <input type="button" id="add_quote_button" value="Quote" title="Quote text"  
+		         onclick="javascript: editor.addTagsToMessage( '[quote]', '[/quote]' );" />
+		  <input type="button" id="add_url_button" value="URL" title="Insert URL"  
+		         onclick="javascript: editor.addTagsToMessage( '[url]', '[/url]' );" />
+		  <input type="button" id="add_image_button" value="IMG" title="Insert image"  
+		         onclick="javascript: editor.addTagsToMessage( '[img]', '[/img]' );" />
+		</td>
         <td width="6%" class="controls_cell" scope="col">&nbsp;</td>
       </tr>
       
       <tr>
         <td class="smilies_cell">Smilies: <br />
 		  <img src="../../images/smilies/icon_arrow.gif" width="15" height="15" 
+		       title="Arrow" alt="Arrow"
 		       onclick="javascipt: editor.addSmileToMessage( ':arrow:' );" />
 		  <img src="../../images/smilies/icon_biggrin.gif" width="15" height="15" 
+		       title="Very Happy" alt="Very Happy"
 		       onclick="javascipt: editor.addSmileToMessage( ':D' );" />
 		  <img src="../../images/smilies/icon_confused.gif" width="15" height="15" 
+		       title="Confused" alt="Confused"
 		       onclick="javascipt: editor.addSmileToMessage( ':?' );" />
 		  <img src="../../images/smilies/icon_cool.gif" width="15" height="15" 
+		       title="Cool" alt="Cool"
 		       onclick="javascipt: editor.addSmileToMessage( '8)' );" />
 		  <img src="../../images/smilies/icon_cry.gif" width="15" height="15"
+		       title="Cry" alt="Cry"
 		       onclick="javascipt: editor.addSmileToMessage( ':cry:' );" />
 		  <img src="../../images/smilies/icon_eek.gif" width="15" height="15" 
+		       title="Shocked" alt="Shocked"
 		       onclick="javascipt: editor.addSmileToMessage( '8O' );" />
 		  <img src="../../images/smilies/icon_evil.gif" width="15" height="15"
+		       title="Evil" alt="Evil"
 		       onclick="javascipt: editor.addSmileToMessage( ':evil:' );" />
 		  <img src="../../images/smilies/icon_exclaim.gif" width="15" height="15" 
+		       title="Exclaim" alt="Exclaim"
 		       onclick="javascipt: editor.addSmileToMessage( ':!:' );" />
 		  <img src="../../images/smilies/icon_frown.gif" width="15" height="15" 
+		       title="Sad" alt="Sad"
 		       onclick="javascipt: editor.addSmileToMessage( ':(' );" />
 		  <img src="../../images/smilies/icon_idea.gif" width="15" height="15"
+		       title="Idea" alt="Idea"
 		       onclick="javascipt: editor.addSmileToMessage( ':idea:' );"  />
 		  <img src="../../images/smilies/icon_lol.gif" width="15" height="15" 
+		       title="Lol" alt="Lol"
 		       onclick="javascipt: editor.addSmileToMessage( ':lol:' );" />
 		  <img src="../../images/smilies/icon_mad.gif" width="15" height="15"
+		       title="Mad" alt="Mad"
 		       onclick="javascipt: editor.addSmileToMessage( ':x' );" />
 		  <img src="../../images/smilies/icon_mrgreen.gif" width="15" height="15" 
+		       title="Mr. Green" alt="Mr. Green"
 		       onclick="javascipt: editor.addSmileToMessage( ':mrgreen:' );" />
 		  <img src="../../images/smilies/icon_neutral.gif" width="15" height="15" 
+		       title="Neutral" alt="Neutral"
 		       onclick="javascipt: editor.addSmileToMessage( ':|' );" />
 		  <img src="../../images/smilies/icon_question.gif" width="15" height="15" 
+		       title="Question" alt="Question"
 		       onclick="javascipt: editor.addSmileToMessage( ':?:' );" />
 		  <img src="../../images/smilies/icon_razz.gif" width="15" height="15" 
+		       title="Razz" alt="Razz"
 		       onclick="javascipt: editor.addSmileToMessage( ':P' );" />
 		  <img src="../../images/smilies/icon_redface.gif" width="15" height="15" 
+		       title="Embarassed" alt="Embarassed"
 		       onclick="javascipt: editor.addSmileToMessage( ':oops:' );" />
 		  <img src="../../images/smilies/icon_rolleyes.gif" width="15" height="15" 
+		       title="Rolling Eyes" alt="Rolling Eyes"
 		       onclick="javascipt: editor.addSmileToMessage( ':roll:' );" />
 		  <img src="../../images/smilies/icon_sad.gif" width="15" height="15" 
+		       title="Sad" alt="Sad"
 		       onclick="javascipt: editor.addSmileToMessage( ':(' );" />
 		  <img src="../../images/smilies/icon_smile.gif" width="15" height="15" 
+		       title="Smile" alt="Smile"
 		       onclick="javascipt: editor.addSmileToMessage( ':)' );" />
 		  <img src="../../images/smilies/icon_surprised.gif" width="15" height="15" 
+		       title="Surprised" alt="Surprised"
 		       onclick="javascipt: editor.addSmileToMessage( ':o' );" />
 		  <img src="../../images/smilies/icon_twisted.gif" width="15" height="15" 
+		       title="Twisted Evil" alt="Twisted Evil"
 		       onclick="javascipt: editor.addSmileToMessage( ':twisted:' );" />
 		  <img src="../../images/smilies/icon_wink.gif" width="15" height="15" 
+		       title="Wink" alt="Wink"
 		       onclick="javascipt: editor.addSmileToMessage( ';)' );" />
 		</td>
         <td rowspan="1" class="text_editor_cell" >
 		  <textarea name="message_area" cols="80" rows="10" id="message_area" 
-		            dir="ltr" xml:lang="ru"></textarea>		
+		            dir="ltr" xml:lang="ru" onselect="javascript: editor.storeCaret();"
+                    onclick="javascript: editor.storeCaret();"
+                    onkeyup="javascript: editor.storeCaret();" ></textarea>		
           <script language="javascript" type="text/javascript">
 		      editor.setTextArea("message_area");
 		  </script>
