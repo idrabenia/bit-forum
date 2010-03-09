@@ -1,0 +1,29 @@
+body {
+	background-color: #FFFFFF;
+}
+.style5 {font-family: "Times New Roman", Times, serif; font-size: 14px; }
+.header {
+	color: #FFFFFF;
+	background: #3F65B4;
+}
+.chapter {
+	color: #355699;
+	background: #9AAFDC;
+}
+.style14 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 24px;
+	color: #3F65B4;
+}
+body,td,th {
+	font-family: Times New Roman, Times, serif;
+	font-size: 16px;
+	color: #000000;
+}
+a {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 16px;
+	color: #2C49D3;
+	text-decoration: none;
+}
+.style15 {color: #FFFFFF}
