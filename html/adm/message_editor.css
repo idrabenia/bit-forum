@@ -20,6 +20,7 @@
 	margin: 3px;
 	padding: 3px;
 	border: 1px solid #FFFFFF;
+	font-family: "Times New Roman", Times, serif;
 }
 .subject_cell {
 	background-color: #99CC66;
@@ -28,4 +29,15 @@
 	margin: 3px;
 	padding: 3px;
 	border: 1px solid #FFFFFF;
+}
+.smilies_link {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	margin: 0px;
+	padding: 0px;
+	height: 0px;
+	width: 0px;
+	visibility: visible;
 }
