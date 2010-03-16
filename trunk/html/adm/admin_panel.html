@@ -20,6 +20,9 @@
 		<table width="100%" border="1" cellpadding="0" cellspacing="0" 
 			   class="options_table">
 		  <tr>
+		    <td colspan="2" class="parameter_name">&nbsp;</td>
+	      </tr>
+		  <tr>
 			<td width="26%" class="parameter_name"><b>Длина логина</b></td>
 			<td width="74%" class="parameter_value">
 				Минимум:  
@@ -34,8 +37,7 @@
 				<span class="error_message" id="login_size_max_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					formValidator.addField("login_size_max", /^(\d)+$/, "login_size_max_error");
-				</script>
-			</td>
+				</script>			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name"><b>Длина пароля </b></td>
@@ -54,8 +56,7 @@
 				<span class="error_message" id="password_size_max_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					formValidator.addField("password_size_max", /^(\d)+$/, "password_size_max_error");
-				</script>
-			</td>
+				</script>			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name"><b>Активация аккаунта</b> </td>
@@ -70,14 +71,12 @@
 				
 				<input type="radio" name="account_activation" value="Email" 
 									id="radio_email_account_activation" />
-				<label for="radio_email_account_activation">По email</label>
-			</td>
+				<label for="radio_email_account_activation">По email</label>			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name">
 				<b>Время действия пароля</b> <br />
-				<small class="parameter_hint">Если 0, то время действия неограничено</small>
-			</td>
+				<small class="parameter_hint">Если 0, то время действия неограничено</small>			</td>
 			<td class="parameter_value">
 				<input type="text" size="10" name="password_action_time" 
 								   id="password_action_time" value="0" />
@@ -86,23 +85,19 @@
 				<script type="text/javascript">
 					formValidator.addField("password_action_time", /^(\d)+$/,
 							"password_action_time_error");
-				</script>
-			</td>
+				</script>			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name">
-				<b>Сложность пароля</b>
-			</td>
+				<b>Сложность пароля</b>			</td>
 			<td class="parameter_value">
 				<select name="password_complexity">
 					<option value="none">Любые символы, начиная с буквы</option>
 					<option value="register">Должно быть чередования регистров</option>
 					<option value="digit">Должны быть цифры</option>
 					<option value="register_digit">
-						Должно быть чередования регистров и цифры
-					</option>
-				</select>
-			</td>
+						Должно быть чередования регистров и цифры					</option>
+				</select>			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name"><b>Загрузка аватаров</b> </td>
@@ -113,14 +108,12 @@
 				
 				<input type="radio" name="avatar_upload" value="disabled" 
 									id="radio_disabled_avatar_upload" />
-				<label for="radio_disabled_avatar_upload">Отключить</label>
-			</td>
+				<label for="radio_disabled_avatar_upload">Отключить</label>			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name"><b>Папка для хранения картинок</b></td>
 			<td class="parameter_value">
-				<input type="text" size="15" name="image_store_path" value="./images"/>
-			</td>
+				<input type="text" size="15" name="image_store_path" value="./images"/>			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name"><b>Email администратора</b> </td>
@@ -131,14 +124,12 @@
 					var regExp
 						= /^([A-z0-9_\-]+\.)*[A-z0-9_\-]+@([A-z0-9][A-z0-9\-]*[A-z0-9]\.)+[A-z]{2,4}$/
 					formValidator.addField("admin_email", regExp, "admin_email_error");
-				</script>
-			</td>
+				</script>			</td>
 		  </tr>
 		  <tr>
 			<td colspan="2" align="center" class="parameter_name">
 				<input type="submit" value="Сохранить" name="submit_button"/>
-				<input type="reset" value="Отменить" name="reset_button" />
-			</td>
+				<input type="reset" value="Отменить" name="reset_button" />			</td>
 		  </tr>
 	  </table>
 	</form>
