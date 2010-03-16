@@ -1,12 +1,12 @@
 .text_editor_cell {
 	text-align: center;
 	vertical-align: top;
-	background-color: #99CC66;
+	background-color: #CCCCCC;
 	display: table-cell;
 	border: 1px solid #FFFFFF;
 }
 .controls_cell {
-	background-color: #99CC66;
+	background-color: #CCCCCC;
 	text-align: left;
 	vertical-align: middle;
 	margin: 3px;
@@ -14,7 +14,7 @@
 	border: 1px solid #FFFFFF;
 }
 .smilies_cell {
-	background-color: #99CC66;
+	background-color: #CCCCCC;
 	text-align: center;
 	vertical-align: top;
 	margin: 3px;
@@ -23,12 +23,13 @@
 	font-family: "Times New Roman", Times, serif;
 }
 .subject_cell {
-	background-color: #99CC66;
+	background-color: #3F65B4;
 	text-align: center;
 	vertical-align: middle;
 	margin: 3px;
 	padding: 3px;
 	border: 1px solid #FFFFFF;
+	color: #FFFFFF;
 }
 .smilies_link {
 	border-top-style: none;

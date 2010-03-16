@@ -3,11 +3,12 @@
 	font-size: medium;
 	font-style: normal;
 	font-weight: normal;
-	background-color: #CCCC66;
+	background-color: #3F65B4;
 	background-attachment: fixed;
 	background-position: center center;
 	border: 1px solid #FFFFFF;
 	padding-left: 5px;
+	color: #FFFFFF;
 }
 .options_table {
 	border: medium solid #FFFFFF;
@@ -15,7 +16,7 @@
 .parameter_value {
 	font-family: "Times New Roman", Times, serif;
 	font-size: medium;
-	background-color: #33CC99;
+	background-color: #CCCCCC;
 	border: 1px solid #FFFFFF;
 	margin: auto;
 	padding-top: 3px;
@@ -34,7 +35,7 @@
 }
 .odd_table_row {
 	font-family: "Times New Roman", Times, serif;
-	background-color: #9999FF;
+	background-color: #B4BCE4;
 	margin: 1px;
 	padding: 1px;
 	border: 1px solid #FFFFFF;
@@ -43,7 +44,7 @@
 }
 .not_odd_table_row {
 	font-family: "Times New Roman", Times, serif;
-	background-color: #99CCFF;
+	background-color: #CCCCCC;
 	margin: 1px;
 	padding: 1px;
 	border: 1px solid #FFFFFF;
