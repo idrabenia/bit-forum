@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Регистрация нового пользователя</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="admin_panel.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<form id="form1" name="user_reg" method="post" action="">
+	<table class="options_table"  width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<td colspan="2" align="center" class="parameter_name"><label><b>Registration</b></label>
+	  </tr>
+      <tr>
+		<th width="50%" class="parameter_value" scope="col"><b>Login</b></th>
+		<th width="50%" class="parameter_value" scope="col">
+		<input type="text" name="in_login" value="" id="text1" />
+	  </tr>
+	  <tr>
+	    <th width="50%" class="parameter_value" scope="col"><b>E-Mail</b></th>
+        <th width="50%" class="parameter_value" scope="col">
+		<input type="text" name="in_email" value="" id="text2" />		
+	  </tr>
+	  <tr>
+	    <th width="50%" class="parameter_value" scope="col"><b>First Name</b></th>
+        <th width="50%" class="parameter_value" scope="col">
+		<input type="text" name="in_firstname" value="" id="text3" />		
+	  </tr>
+	  <tr>
+	    <th width="50%" class="parameter_value" scope="col"><b>Last Name</b></th> 
+        <th width="50%" class="parameter_value" scope="col">
+		<input type="text" name="in_lastname" value="" id="text4" />		
+	  </tr>
+	  <tr>
+	    <th width="50%" class="parameter_value" scope="col"><b>Password</b></th> 
+        <th width="50%" class="parameter_value" scope="col">
+		<input type="text" name="in_password1" value="" id="text5" />		
+		</tr>
+	  <tr>
+	    <th width="50%" class="parameter_value" scope="col"><b>Confirm Password</b></th> 
+        <th width="50%" class="parameter_value" scope="col">
+		<input type="text" name="in_password2" value="" id="text6" />		
+	  </tr>
+	  <tr>
+		<td colspan="2" align="center" class="parameter_name">
+				<input type="submit" value="Next" name="submit_button"/>
+				<input type="reset" value="Reset" name="reset_button" />
+		</td>
+	  </tr>  
+	</table>
+</form>
+</body>
+</html>
