@@ -1,4 +1,9 @@
 <?php
+/**
+ * File contain functions for make safe user message
+ * and convert it to html
+ * @author Ilya Drobenya
+ */
 
 require_once("config.php");
 
@@ -102,8 +107,8 @@ function insert_smilies($message) {
         $db_connection)
         or die('Could not fetch data from database');
 
-    while ($cur_smile = mysql_fetch_array($smilies, MYSQL_ASSOC))
-    {
+    // replace smiles aliases to smile image reference
+    while ($cur_smile = mysql_fetch_array($smilies, MYSQL_ASSOC)) {
         $image_path = $cur_smile['smile_image_path'];
         $message = str_replace( $cur_smile['smile_alias'],
             "<img src=\"$image_path\" />", $message );
