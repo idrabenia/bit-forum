@@ -16,7 +16,7 @@
       <tr>
         <td class="subject_cell" scope="col"><b>Subject</b></td>
         <td class="subject_cell" scope="col">
-			<input type="text" size="70" name="textfield" />
+			<input type="text" size="105" name="textfield" />
 		</td>
         <td class="subject_cell" scope="col">&nbsp;</td>
       </tr>
@@ -35,7 +35,7 @@
 		  <input type="button" id="add_image_button" value="IMG" title="Insert image"  
 		         onclick="javascript: editor.addTagsToMessage( '[img]', '[/img]' );" />
 		</td>
-        <td width="6%" class="controls_cell" scope="col">&nbsp;</td>
+        <td width="9%" class="controls_cell" scope="col">&nbsp;</td>
       </tr>
       
       <tr>
@@ -115,12 +115,12 @@
         <td rowspan="1" class="text_editor_cell" >
 		  <p>
 		    <textarea name="message_area" cols="80" rows="10" id="message_area" 
-		            dir="ltr" xml:lang="ru" onselect="javascript: editor.storeCaret();"
+		            onselect="javascript: editor.storeCaret();"
                     onclick="javascript: editor.storeCaret();"
                     onkeyup="javascript: editor.storeCaret();" ></textarea>		
 		    <script language="javascript" type="text/javascript">
 		      editor.setTextArea("message_area");
-		  </script>  
+		    </script>  
 		  </p>
 	    </td>
 		<td class="controls_cell">&nbsp;</td>
@@ -128,7 +128,10 @@
 	  
 	   <tr>
         <td class="subject_cell" scope="col">&nbsp;</td>
-        <td class="subject_cell" scope="col">&nbsp;</td>
+        <td class="subject_cell" scope="col">
+          <input type="submit" value="Отправить" />
+		  <input type="reset" value="Очистить" />
+        </td>
         <td class="subject_cell" scope="col">&nbsp;</td>
       </tr>
     </table>
