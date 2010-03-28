@@ -4,6 +4,8 @@
 	background-color: #CCCCCC;
 	display: table-cell;
 	border: 1px solid #FFFFFF;
+	margin: 3px;
+	padding: 3px;
 }
 .controls_cell {
 	background-color: #CCCCCC;
@@ -30,15 +32,4 @@
 	padding: 3px;
 	border: 1px solid #FFFFFF;
 	color: #FFFFFF;
-}
-.smilies_link {
-	border-top-style: none;
-	border-right-style: none;
-	border-bottom-style: none;
-	border-left-style: none;
-	margin: 0px;
-	padding: 0px;
-	height: 0px;
-	width: 0px;
-	visibility: visible;
 }
