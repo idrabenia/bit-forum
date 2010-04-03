@@ -21,21 +21,21 @@ define('ADMIN_PANEL_PATH', 'templates/Admin/admin_panel.tpl');
  * @return Administrator panel in HTML. 
  */
 function make_admin_panel($db_connect=FALSE) {
-	
+    
     // Connect to database
-	if (FALSE === $db_connect) {
-		$db_connect = connect_to_database();
-	}
+    if (FALSE === $db_connect) {
+        $db_connect = connect_to_database();
+    }
 	
-	// Load template
+    // Load template
     $template = file_get_contents(ADMIN_PANEL_PATH);
-	
-	// Fetch parameters from database 
-	$results = mysql_query(
-	   "SELECT `param_name`, `param_value` "
-	   . "FROM `config` ", 
-	   $db_connect)
-	   or die('Could not fetch data from database');
+    
+    // Fetch parameters from database 
+    $results = mysql_query(
+       "SELECT `param_name`, `param_value` "
+       . "FROM `config` ", 
+       $db_connect)
+       or die('Could not fetch data from database');
 
     $parameters = array();
     while ($row = mysql_fetch_assoc($results)) {
@@ -111,27 +111,27 @@ function input_parameters($db_connect=FALSE) {
 	
 	// Validate and save received data
 	$fields_patterns = array(
-	   'login_size_min' => "/^(\d){1,2}$/", 
-	   'login_size_max' => "/^(\d){1,2}$/", 
-	   'password_size_max' => "/^(\d){1,2}$/",
-	   'password_size_min' => "/^(\d){1,2}$/",
-	   'password_action_time' => "/^(\d){1,3}$/",
-	   'image_store_path' => "/^(.)*$/",
-	   'admin_email' => "/^([A-z0-9_\-]+\.)*[A-z0-9_\-]+"
+        'login_size_min' => "/^(\d){1,2}$/", 
+        'login_size_max' => "/^(\d){1,2}$/", 
+        'password_size_max' => "/^(\d){1,2}$/",
+		'password_size_min' => "/^(\d){1,2}$/",
+		'password_action_time' => "/^(\d){1,3}$/",
+		'image_store_path' => "/^(.)*$/",
+		'admin_email' => "/^([A-z0-9_\-]+\.)*[A-z0-9_\-]+"
 	       . "@([A-z0-9][A-z0-9\-]*[A-z0-9]\.)+[A-z]{2,4}$/",
-	   'account_activation' => "/^(NO_ACCOUNT_ACTIVATION"
+        'account_activation' => "/^(NO_ACCOUNT_ACTIVATION"
 	       . "|DISABLED_ACCOUNT_ACTIVATION"
 	       . "|EMAIL_ACCOUNT_ACTIVATION)$/",
-	   'avatar_upload' => "/^(ENABLED_AVATARS|DISABLED_AVATARS)$/",
-	   'password_complexity' => "/^(NO_PASSW_COMPLEX"
+	    'avatar_upload' => "/^(ENABLED_AVATARS|DISABLED_AVATARS)$/",
+	    'password_complexity' => "/^(NO_PASSW_COMPLEX"
 	       . "|REGISTER_PASSW_COMPLEX|DIGIT_PASSW_COMPLEX"
 	       . "|DIGIT_REGISTER_PASSW_COMPLEX)$/"
 	);
 	$fields_aliases = array(
 	   'login_size_min' => 'MIN_LOGIN_SIZE', 
-       'login_size_max' => 'MAX_LOGIN_SIZE', 
-       'password_size_max' => 'MAX_PASSWORD_SIZE',
-       'password_size_min' => 'MIN_PASSWORD_SIZE',
+	       'login_size_max' => 'MAX_LOGIN_SIZE', 
+	       'password_size_max' => 'MAX_PASSWORD_SIZE',
+	       'password_size_min' => 'MIN_PASSWORD_SIZE',
 	   'password_action_time' => 'PASSW_ACTION_TIME',
 	   'image_store_path' => 'IMAGES_PATH',
 	   'admin_email' => 'ADMINS_EMAIL',
