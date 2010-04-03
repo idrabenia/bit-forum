@@ -11,12 +11,14 @@ require_once("config.php");
 /**
  * Function parse bbcodes and insert corresponding
  * tags, smiles, images and urls.
- * Ex. Input:  Hello, [b]Joe[/b]!
+ * @example
+ *     Input:  Hello, [b]Joe[/b]!
  *     Result: Hello, <b>Joe</b>!
  * @param message User message with bbcodes
+ * @param db_connect Connection to database
  * @return User message in HTML
  */
-function user_message_to_html($message) {
+function user_message_to_html($message, $db_connect=FALSE) {
     // make string from user safe
     $message = trim($message);
     $message = htmlspecialchars($message);
@@ -29,7 +31,8 @@ function user_message_to_html($message) {
     $result_message = replace_bbcodes( $result_message );
 
     // process smiles
-    $result_message = insert_smilies( $result_message );
+    $result_message = insert_smilies( $result_message, 
+        $db_connect );
 
     return $result_message;
 } // parse_user_message
@@ -94,14 +97,17 @@ function replace_bbcodes($message) {
  * Function for replace smile alias to smile image reference.
  * @return modified string
  */
-function insert_smilies($message) {
+function insert_smilies($message, $db_connection=FALSE) {
     // Fetch smilies data from database
-    $db_connection = mysql_connect( DB_PATH, DB_USER, DB_PASSWORD )
-        or die('Could not connect to database');
-
-    mysql_select_db('bit_forum', $db_connection)
-        or die('Could not select database');
-
+    if (FALSE === $db_connection) {
+	    $db_connection = mysql_connect( DB_PATH, DB_USER, 
+	           DB_PASSWORD )
+	        or die('Could not connect to database');
+	
+	    mysql_select_db('bit_forum', $db_connection)
+	        or die('Could not select database');
+    }
+    
     $smilies = mysql_query(
         "SELECT `smile_alias`, `smile_image_path` FROM `smilies`",
         $db_connection)
