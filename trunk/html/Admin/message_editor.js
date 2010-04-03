@@ -18,7 +18,7 @@ MessageEditor.prototype.addSmileToMessage = function(smileText) {
 	}
 
     this.insertText('', ' ' + smileText + ' ');
-}
+};
 
 
 MessageEditor.prototype.addTagsToMessage = function(startTag, endTag) {
@@ -27,7 +27,7 @@ MessageEditor.prototype.addTagsToMessage = function(startTag, endTag) {
 	}
 
     this.insertText(startTag, endTag);
-}
+};
 
 
 MessageEditor.prototype.setTextArea = function(textAreaId) {
@@ -37,7 +37,7 @@ MessageEditor.prototype.setTextArea = function(textAreaId) {
 	}
 	
 	this.textArea = textArea;
-}
+};
 
 
 // function for store caret position
@@ -47,7 +47,7 @@ MessageEditor.prototype.storeCaret = function() {
 		var textArea = this.textArea;
         textArea.caretPosition = document.selection.createRange().duplicate();	
     }
-}
+};
 
 
 // function for insert text into text area around selected text or at end
@@ -67,4 +67,4 @@ MessageEditor.prototype.insertText = function(startText, endText) {
     else {
         this.textArea.value += startText + endText;
     }
-}
+};
