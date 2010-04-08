@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File contain functions for processing requests.
+ * File contain functions for processing requests
  * to admin panel.
  * @author Ilya Drobenya
  */
@@ -44,12 +44,10 @@ function make_admin_panel($db_connect=FALSE) {
     
     // Insert parameters into template
     $holders = array(
-        '{MIN_LOGIN_SIZE}' => '"'.$parameters['MIN_LOGIN_SIZE'].'"',
-        '{MAX_LOGIN_SIZE}' => '"'.$parameters['MAX_LOGIN_SIZE'].'"',
-        '{MIN_PASSWORD_SIZE}' => '"'
-            .$parameters['MIN_PASSWORD_SIZE'].'"',
-        '{MAX_PASSWORD_SIZE}' => '"'
-            .$parameters['MAX_PASSWORD_SIZE'].'"',
+        '{MIN_LOGIN_SIZE}' => $parameters['MIN_LOGIN_SIZE'],
+        '{MAX_LOGIN_SIZE}' => $parameters['MAX_LOGIN_SIZE'],
+        '{MIN_PASSWORD_SIZE}' => $parameters['MIN_PASSWORD_SIZE'],
+        '{MAX_PASSWORD_SIZE}' => $parameters['MAX_PASSWORD_SIZE'],
             
         // Set account activation
         '{NO_ACCOUNT_ACTIVATION}' => 
@@ -65,8 +63,7 @@ function make_admin_panel($db_connect=FALSE) {
                 === 'EMAIL_ACCOUNT_ACTIVATION')?
                 'checked="checked"' : '',
                 
-        '{PASSW_ACTION_TIME}' => '"'
-                .$parameters['PASSW_ACTION_TIME'].'"',
+        '{PASSW_ACTION_TIME}' => $parameters['PASSW_ACTION_TIME'],
                 
         // Set password complexity
         '{NO_PASSW_COMPLEX}' => ($parameters['PASSW_COMPLEXITY'] 
@@ -116,7 +113,7 @@ function input_parameters($db_connect=FALSE) {
         'password_size_max' => "/^(\d){1,2}$/",
 		'password_size_min' => "/^(\d){1,2}$/",
 		'password_action_time' => "/^(\d){1,3}$/",
-		'image_store_path' => "/^(.)*$/",
+		'image_store_path' => "/^([^'])*$/",
 		'admin_email' => "/^([A-z0-9_\-]+\.)*[A-z0-9_\-]+"
 	       . "@([A-z0-9][A-z0-9\-]*[A-z0-9]\.)+[A-z]{2,4}$/",
         'account_activation' => "/^(NO_ACCOUNT_ACTIVATION"
@@ -129,9 +126,9 @@ function input_parameters($db_connect=FALSE) {
 	);
 	$fields_aliases = array(
 	   'login_size_min' => 'MIN_LOGIN_SIZE', 
-	       'login_size_max' => 'MAX_LOGIN_SIZE', 
-	       'password_size_max' => 'MAX_PASSWORD_SIZE',
-	       'password_size_min' => 'MIN_PASSWORD_SIZE',
+	   'login_size_max' => 'MAX_LOGIN_SIZE', 
+	   'password_size_max' => 'MAX_PASSWORD_SIZE',
+	   'password_size_min' => 'MIN_PASSWORD_SIZE',
 	   'password_action_time' => 'PASSW_ACTION_TIME',
 	   'image_store_path' => 'IMAGES_PATH',
 	   'admin_email' => 'ADMINS_EMAIL',
@@ -179,6 +176,8 @@ function update_config($name, $value, $db_connect=FALSE) {
 		$db_connect = connect_to_database();
 	}
 	
+	$name = mysql_escape_string($name);
+	$value = mysql_escape_string($value);
     mysql_query(
         "UPDATE `config` "
         . "SET `param_value`='$value' "
