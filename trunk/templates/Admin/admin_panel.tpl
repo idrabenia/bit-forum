@@ -28,7 +28,7 @@
 			<td width="74%" class="parameter_value">
 				Минимум:  
 				<input type="text" name="login_size_min" id="login_size_min" 
-					   value={MIN_LOGIN_SIZE} size="10"  /> 
+					   value="{MIN_LOGIN_SIZE}" size="10"  /> 
 				<span class="error_message" id="login_size_min_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					formValidator.addField("login_size_min", /^(\d){1,2}$/, "login_size_min_error");
@@ -36,18 +36,19 @@
 				
 				Максимум:
 				<input type="text" name="login_size_max" id="login_size_max" 
-					   value={MAX_LOGIN_SIZE} size="10" /> 
+					   value="{MAX_LOGIN_SIZE}" size="10" /> 
 				<span class="error_message" id="login_size_max_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					formValidator.addField("login_size_max", /^(\d){1,2}$/, "login_size_max_error");
-				</script>			</td>
+				</script>			
+            </td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name"><b>Длина пароля </b></td>
 			<td class="parameter_value">
 				Минимум: 
 				<input type="text" name="password_size_min" id="password_size_min" 
-					   value={MIN_PASSWORD_SIZE} size="10" />
+					   value="{MIN_PASSWORD_SIZE}" size="10" />
 				<span class="error_message" id="password_size_min_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					formValidator.addField("password_size_min", /^(\d){1,2}$/,
@@ -56,7 +57,7 @@
 				 
 				Максимум:
 				<input type="text" name="password_size_max" id="password_size_max"
-						           value={MAX_PASSWORD_SIZE} size="10" /> 
+						           value="{MAX_PASSWORD_SIZE}" size="10" /> 
 				<span class="error_message" id="password_size_max_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					formValidator.addField("password_size_max", /^(\d){1,2}$/,
@@ -87,7 +88,7 @@
 				<small class="parameter_hint">Если 0, то время действия неограничено</small>			</td>
 			<td class="parameter_value">
 				<input type="text" size="10" name="password_action_time" 
-								   id="password_action_time" value={PASSW_ACTION_TIME} />
+								   id="password_action_time" value="{PASSW_ACTION_TIME}" />
 				Дней
 				<span class="error_message" id="password_action_time_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
@@ -129,13 +130,13 @@
 		  <tr>
 			<td class="parameter_name"><b>Папка для хранения картинок</b></td>
 			<td class="parameter_value">
-				<input type="text" size="15" name="image_store_path" value={IMAGES_PATH} />
+				<input type="text" size="15" name="image_store_path" value="{IMAGES_PATH}" />
 			</td>
 		  </tr>
 		  <tr>
 			<td class="parameter_name"><b>Email администратора</b> </td>
 			<td class="parameter_value">
-				<input type="text" name="admin_email" id="admin_email"  value={ADMINS_EMAIL} />
+				<input type="text" name="admin_email" id="admin_email"  value="{ADMINS_EMAIL}" />
 				<span class="error_message" id="admin_email_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp
