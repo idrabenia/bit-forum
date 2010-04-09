@@ -6,6 +6,7 @@
  */
 
 require_once("config.php");
+require_once("utilities.php");
 
 
 /**
@@ -98,25 +99,33 @@ function replace_bbcodes($message) {
  * @return modified string
  */
 function insert_smilies($message, $db_connection=FALSE) {
-    // Fetch smilies data from database
-    if (FALSE === $db_connection) {
-	    $db_connection = mysql_connect( DB_PATH, DB_USER, 
-	           DB_PASSWORD )
-	        or die('Could not connect to database');
-	
-	    mysql_select_db('bit_forum', $db_connection)
-	        or die('Could not select database');
-    }
     
-    $smilies = mysql_query(
-        "SELECT `smile_alias`, `smile_image_path` FROM `smilies`",
-        $db_connection)
-        or die('Could not fetch data from database');
-
-    // replace smiles aliases to smile image reference
-    while ($cur_smile = mysql_fetch_array($smilies, MYSQL_ASSOC)) {
-        $image_path = $cur_smile['smile_image_path'];
-        $message = str_replace( $cur_smile['smile_alias'],
+    static $smilies = FALSE;
+    
+    // if smilies not cashed
+    if ($smilies === FALSE) {
+    	
+        if (FALSE === $db_connection) {
+            $db_connection = connect_to_database();
+        }
+    	
+        // get smilies from databse
+        $results = mysql_query(
+	       "SELECT `smile_alias`, `smile_image_path` " 
+	       . "FROM `smilies` ",
+	       $db_connection)
+	       or die('Could not fetch data from database');
+	
+        $smilies = array();
+	    while ($cur_smile = mysql_fetch_assoc($results)) {
+	        $image_path = $cur_smile['smile_image_path'];
+	        $smilies[ $cur_smile['smile_alias'] ] = $image_path;
+	    }
+    } // if
+    
+    // Replace smilies aliases to image paths
+    foreach ($smilies as $alias => $image_path) {
+        $message = str_replace( $alias,
             "<img src=\"$image_path\" />", $message );
     }
 
