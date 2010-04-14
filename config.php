@@ -14,10 +14,13 @@ define('DB_PATH', 'localhost:3306');
 
 define('DB_NAME', 'bit_forum');
 
+/** Path after host to application folder */
+define('ROOT_PATH', '/');
+
 /** Application configuration */
 define('DEBUG', TRUE);
 
-/* Show errors if necessary */
+/** Show errors if necessary */
 if (DEBUG === TRUE) { 
     ini_set('display_errors', 'On');
     error_reporting(E_ALL);
