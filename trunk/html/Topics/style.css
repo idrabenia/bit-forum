@@ -1,29 +1,27 @@
-body {
-	background-color: #FFFFFF;
-}
-.style5 {font-family: "Times New Roman", Times, serif; font-size: 14px; }
-.header {
-	color: #FFFFFF;
+/* CSS Document */
+.table_header{
 	background: #3F65B4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
 }
-.chapter {
+.message_header{
 	color: #355699;
 	background: #9AAFDC;
+	border: 1px solid #FFFFFF;
 }
-.style14 {
-	font-family: "Times New Roman", Times, serif;
-	font-size: 24px;
-	color: #3F65B4;
-}
-body,td,th {
-	font-family: Times New Roman, Times, serif;
-	font-size: 16px;
+.message_text{
 	color: #000000;
+	background: #CCCCCC;
+	border: 1px solid #FFFFFF;
+}
+.step_line{
+	color:#3F65B4;
+	background: #FFFFFF;
 }
 a {
 	font-family: "Times New Roman", Times, serif;
-	font-size: 16px;
-	color: #2C49D3;
+	font-size: 14px;
+	color: #3F65B4;
 	text-decoration: none;
 }
-.style15 {color: #FFFFFF}
+
