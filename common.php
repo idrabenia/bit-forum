@@ -5,10 +5,11 @@
  * @author Ilya Drobenya
  */
 
+require_once('config.php');
 
 /**
  * Create connection to database.
- * @return Database connection
+ * @return database connection
  * @author Ilya Drobenya
  */
 function connect_to_database() {
@@ -18,6 +19,18 @@ function connect_to_database() {
         or die('Could not select database');
     return $connection;
 }
+$db_link = connect_to_database(); 
+
+
+/** Show errors if necessary */
+if (DEBUG === TRUE) { 
+    ini_set('display_errors', 'On');
+    error_reporting(E_ALL);
+} 
+else {
+    ini_set('display_errors', 'Off');
+    error_reporting(0);
+} // if
 
 
 ?>

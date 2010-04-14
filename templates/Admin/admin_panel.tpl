@@ -3,9 +3,6 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf8" />
 	<title>Панель администратора</title>
-	<meta http-equiv="" content="text/html; charset=utf-8" />
-	<meta http-equiv="Выберите расширение для паковки" content="text/html; charset=utf-8" />
-	<meta http-equiv="Выберите расширение для паковки" content="text/html; charset=utf-8" />
     <link href="{ROOT_PATH}templates/styles.css" rel="stylesheet" type="text/css" />
 	<script language="JavaScript" type="text/javascript" 
 			src="{ROOT_PATH}templates/Admin/form_check.js">
@@ -19,6 +16,7 @@
 	</script>
 	
 	<form method="post" action="." onsubmit="return formValidator.run();" >	
+		<input type="hidden" name="action" value="admin_panel" />
 		<table width="100%" border="1" cellpadding="0" cellspacing="0" 
 			   class="options_table">
 		  <tr>

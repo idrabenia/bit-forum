@@ -5,8 +5,7 @@
  * @author Ilya Drobenya
  */
 
-require_once("config.php");
-require_once("utilities.php");
+require_once("common.php");
 
 
 /**
@@ -19,7 +18,7 @@ require_once("utilities.php");
  * @param db_connect Connection to database
  * @return User message in HTML
  */
-function user_message_to_html($message, $db_connect=FALSE) {
+function user_message_to_html($message) {
     // make string from user safe
     $message = trim($message);
     $message = htmlspecialchars($message);
@@ -32,8 +31,7 @@ function user_message_to_html($message, $db_connect=FALSE) {
     $result_message = replace_bbcodes( $result_message );
 
     // process smiles
-    $result_message = insert_smilies( $result_message, 
-        $db_connect );
+    $result_message = insert_smilies( $result_message );
 
     return $result_message;
 } // parse_user_message
@@ -98,17 +96,14 @@ function replace_bbcodes($message) {
  * Function for replace smile alias to smile image reference.
  * @return modified string
  */
-function insert_smilies($message, $db_connection=FALSE) {
+function insert_smilies($message) {
+    global $db_link;
+    $db_connection = $db_link;
     
     static $smilies = FALSE;
     
     // if smilies not cashed
-    if ($smilies === FALSE) {
-    	
-        if (FALSE === $db_connection) {
-            $db_connection = connect_to_database();
-        }
-    	
+    if ($smilies === FALSE) {    	
         // get smilies from databse
         $results = mysql_query(
 	       "SELECT `smile_alias`, `smile_image_path` " 

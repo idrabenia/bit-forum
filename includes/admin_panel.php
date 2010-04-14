@@ -6,8 +6,7 @@
  * @author Ilya Drobenya
  */
 
-require_once('config.php');
-require_once('utilities.php');
+require_once('common.php');
 
 
 /** Path to main administrator panel template */
@@ -20,12 +19,10 @@ define('ADMIN_PANEL_PATH', 'templates/Admin/admin_panel.tpl');
  * @param db_connect Used connection to database.
  * @return Administrator panel in HTML. 
  */
-function make_admin_panel($db_connect=FALSE) {
-    
+function make_admin_panel() {
+    global $db_link;
     // Connect to database
-    if (FALSE === $db_connect) {
-        $db_connect = connect_to_database();
-    }
+    $db_connect = $db_link;
 	
     // Load template
     $template = file_get_contents(ADMIN_PANEL_PATH);
@@ -100,15 +97,10 @@ function make_admin_panel($db_connect=FALSE) {
  * Function save in database received parameters. 
  * @param $db_connect Used connection to database.
  */
-function input_parameters($db_connect=FALSE) {
-	
-	// Connect to database
-	if ($db_connect === FALSE) {
-		$db_connect = connect_to_database();
-	}
+function modify_config() {
 	
 	// Validate and save received data
-	$fields_patterns = array(
+    $fields_patterns = array(
         'login_size_min' => "/^(\d){1,2}$/", 
         'login_size_max' => "/^(\d){1,2}$/", 
         'password_size_max' => "/^(\d){1,2}$/",
@@ -172,10 +164,9 @@ function is_post_param_correct($param_name, $pattern) {
  * @param $value New config parameter value.
  * @param $db_connect Connection to database.
  */
-function update_config($name, $value, $db_connect=FALSE) {
-	if ($db_connect === FALSE) {
-		$db_connect = connect_to_database();
-	}
+function update_config($name, $value) {
+	global $db_link;
+    $db_connect = $db_link;	
 	
 	$name = mysql_escape_string($name);
 	$value = mysql_escape_string($value);
