@@ -6,8 +6,9 @@
 	<meta http-equiv="" content="text/html; charset=utf-8" />
 	<meta http-equiv="Выберите расширение для паковки" content="text/html; charset=utf-8" />
 	<meta http-equiv="Выберите расширение для паковки" content="text/html; charset=utf-8" />
-    <link href="./templates/styles.css" rel="stylesheet" type="text/css" />
-	<script language="JavaScript" type="text/javascript" src="./templates/Admin/form_check.js">
+    <link href="{ROOT_PATH}templates/styles.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript" type="text/javascript" 
+			src="{ROOT_PATH}templates/Admin/form_check.js">
 	</script>
 </head>
 

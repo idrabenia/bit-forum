@@ -36,70 +36,70 @@ TRUNCATE TABLE `bit_forum`.`smilies`;
 
 -- Smile :?: have collision with :? and must be above of :?. 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':?:', '/images/smilies/icon_question.gif');
+VALUES (':?:', 'images/smilies/icon_question.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':?', '/images/smilies/icon_confused.gif');
+VALUES (':?', 'images/smilies/icon_confused.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':arrow:', '/images/smilies/icon_arrow.gif');
+VALUES (':arrow:', 'images/smilies/icon_arrow.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':D', '/images/smilies/icon_biggrin.gif');
+VALUES (':D', 'images/smilies/icon_biggrin.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES ('8)', '/images/smilies/icon_cool.gif');
+VALUES ('8)', 'images/smilies/icon_cool.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':cry:', '/images/smilies/icon_cry.gif');
+VALUES (':cry:', 'images/smilies/icon_cry.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES ('8O', '/images/smilies/icon_eek.gif');
+VALUES ('8O', 'images/smilies/icon_eek.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':evil:', '/images/smilies/icon_evil.gif');
+VALUES (':evil:', 'images/smilies/icon_evil.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':!:', '/images/smilies/icon_exclaim.gif');
+VALUES (':!:', 'images/smilies/icon_exclaim.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':(', '/images/smilies/icon_frown.gif');
+VALUES (':(', 'images/smilies/icon_frown.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':idea:', '/images/smilies/icon_idea.gif');
+VALUES (':idea:', 'images/smilies/icon_idea.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':lol:', '/images/smilies/icon_lol.gif');
+VALUES (':lol:', 'images/smilies/icon_lol.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':x', '/images/smilies/icon_mad.gif');
+VALUES (':x', 'images/smilies/icon_mad.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':mrgreen:', '/images/smilies/icon_mrgreen.gif');
+VALUES (':mrgreen:', 'images/smilies/icon_mrgreen.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':|', '/images/smilies/icon_neutral.gif');
+VALUES (':|', 'images/smilies/icon_neutral.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':P', '/images/smilies/icon_razz.gif');
+VALUES (':P', 'images/smilies/icon_razz.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':oops:', '/images/smilies/icon_redface.gif');
+VALUES (':oops:', 'images/smilies/icon_redface.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':roll:', '/images/smilies/icon_rolleyes.gif');
+VALUES (':roll:', 'images/smilies/icon_rolleyes.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':)', '/images/smilies/icon_smile.gif');
+VALUES (':)', 'images/smilies/icon_smile.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':o', '/images/smilies/icon_surprised.gif');
+VALUES (':o', 'images/smilies/icon_surprised.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (':twisted:', '/images/smilies/icon_twisted.gif');
+VALUES (':twisted:', 'images/smilies/icon_twisted.gif');
 
 INSERT INTO `bit_forum`.`smilies` (`smile_alias`, `smile_image_path`)
-VALUES (';)', '/images/smilies/icon_wink.gif');
+VALUES (';)', 'images/smilies/icon_wink.gif');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

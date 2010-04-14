@@ -118,7 +118,7 @@ function insert_smilies($message, $db_connection=FALSE) {
 	
         $smilies = array();
 	    while ($cur_smile = mysql_fetch_assoc($results)) {
-	        $image_path = $cur_smile['smile_image_path'];
+	        $image_path = ROOT_PATH.$cur_smile['smile_image_path'];
 	        $smilies[ $cur_smile['smile_alias'] ] = $image_path;
 	    }
     } // if

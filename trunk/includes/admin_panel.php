@@ -44,6 +44,7 @@ function make_admin_panel($db_connect=FALSE) {
     
     // Insert parameters into template
     $holders = array(
+        '{ROOT_PATH}' => ROOT_PATH,
         '{MIN_LOGIN_SIZE}' => $parameters['MIN_LOGIN_SIZE'],
         '{MAX_LOGIN_SIZE}' => $parameters['MAX_LOGIN_SIZE'],
         '{MIN_PASSWORD_SIZE}' => $parameters['MIN_PASSWORD_SIZE'],
