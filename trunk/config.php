@@ -20,14 +20,7 @@ define('ROOT_PATH', '/');
 /** Application configuration */
 define('DEBUG', TRUE);
 
-/** Show errors if necessary */
-if (DEBUG === TRUE) { 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-} 
-else {
-	ini_set('display_errors', 'Off');
-	error_reporting(0);
-} // if
+/** Global database connection */
+$db_link = FALSE;
 
 ?>
