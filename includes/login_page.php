@@ -47,7 +47,7 @@ function login_user($db_connect = FALSE) {
         $db_connect = connect_to_database();
 	}
 	
-    $auth = Authenticator::getInstance($db_connect);
+    $auth = User::getInstance($db_connect);
     $remember = (isset($_POST['has_remember']))? TRUE : FALSE; 
     $auth->login($_POST['nickname'], $_POST['password'], $remember);
 }

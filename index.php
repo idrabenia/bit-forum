@@ -7,17 +7,17 @@ require_once('includes/authorization.php');
 require_once('includes/login_page.php');
 
 
-$auth = Authenticator::getInstance();
+$auth = User::getInstance();
 $action_type = ( isset($_REQUEST['action']) )? $_REQUEST['action'] 
     : '';
     
 switch ($action_type) {
     case 'login': 
-        if (Authenticator::GUEST === $auth->getUserRole()) {
+        if (User::GUEST === $auth->getUserRole()) {
         	echo "login user";
             login_user();
         }
-        if (Authenticator::GUEST === $auth->getUserRole()) {
+        if (User::GUEST === $auth->getUserRole()) {
         	echo "make_login_page";
             echo make_login_page();
         }
@@ -28,7 +28,7 @@ switch ($action_type) {
     break;
     
     case 'admin_panel':
-        if (Authenticator::ADMINISTRATOR === $auth->getUserRole()) {
+        if (User::ADMINISTRATOR === $auth->getUserRole()) {
         	modify_config();
             echo make_admin_panel();
         } 
