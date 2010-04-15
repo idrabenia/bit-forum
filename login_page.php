@@ -6,10 +6,18 @@
  */
 
 require_once('common.php');
-require_once('authorization.php');
+require_once('includes/authorization.php');
 
 define('LOGIN_TPL_PATH', 'templates/login.tpl');
-define('MAIN_TPL_PATH', 'templates/main.tpl');
+
+
+if (User::getInstance()->isGuest()) {
+    login_user();
+}
+
+if (User::getInstance()->isGuest()) {
+    echo make_login_page();
+}
 
 /**
  * Function create login page

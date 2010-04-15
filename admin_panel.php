@@ -7,11 +7,20 @@
  */
 
 require_once('common.php');
+require_once('includes/authorization.php');
 
 
 /** Path to main administrator panel template */
 define('ADMIN_PANEL_PATH', 'templates/Admin/admin_panel.tpl');
 
+$user = User::getInstance(); 
+if (!$user->isAdmin()) {
+	echo 'Error 404: Page Not Found';
+	exit();
+}
+
+modify_config();
+echo make_admin_panel();
 
 /**
  * Function fetch from database configuration parameters 
@@ -26,6 +35,7 @@ function make_admin_panel() {
 	
     // Load template
     $template = file_get_contents(ADMIN_PANEL_PATH);
+    $main_tpl = file_get_contents(MAIN_TPL_PATH);
     
     // Fetch parameters from database 
     $results = mysql_query(
@@ -41,6 +51,7 @@ function make_admin_panel() {
     
     // Insert parameters into template
     $holders = array(
+        '{TITLE}' => 'Admin Panel',
         '{ROOT_PATH}' => ROOT_PATH,
         '{MIN_LOGIN_SIZE}' => $parameters['MIN_LOGIN_SIZE'],
         '{MAX_LOGIN_SIZE}' => $parameters['MAX_LOGIN_SIZE'],
@@ -85,11 +96,15 @@ function make_admin_panel() {
         '{ADMINS_EMAIL}' => $parameters['ADMINS_EMAIL']
     );    
         
-    foreach ($holders as $curHolder => $curValue) {
-        $template = str_replace($curHolder,
-            $curValue, $template);
+    foreach ($holders as $cur_holder => $cur_value) {
+        $template = str_replace($cur_holder,
+            $cur_value, $template);
+        $main_tpl = str_replace($cur_holder, $cur_value,
+            $main_tpl);
     }
-    return $template;
+    
+    $main_tpl = str_replace('{BODY}', $template, $main_tpl);
+    return $main_tpl;
 } // show_admin_panel
 
 
