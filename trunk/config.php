@@ -23,4 +23,7 @@ define('DEBUG', TRUE);
 /** Global database connection */
 $db_link = FALSE;
 
+/** Path to main page template */
+define('MAIN_TPL_PATH', 'templates/main.tpl');
+
 ?>

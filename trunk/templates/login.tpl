@@ -1,3 +1,4 @@
+<table align="center" height="400"> <tr> <td>
 <form action="." method="post">
 	<table class="options_table" width="269" height="92" border="0" cellpadding="3" 
 		   cellspacing="0" >			  
@@ -34,3 +35,4 @@
 		</tr>
 	</table>
 </form>
+</td></tr></table>
