@@ -16,7 +16,7 @@ define('SECONDS_PER_MONTH', 60 * 60 * 24 * 30);
  * For get instance use method getInstance. 
  * @author Ilya G. Drobenya
  */
-class Authenticator
+class User
 {
 	// User roles
     const GUEST = 1;
@@ -29,7 +29,7 @@ class Authenticator
 	 */
     public static function getInstance() {
         if (self::$instance === NULL) {
-            self::$instance = new Authenticator();
+            self::$instance = new User();
         }
 		
         return self::$instance;
@@ -118,26 +118,64 @@ class Authenticator
         }
    
         return $role;
-	} // login
+    } // login
     
     
-	/**
-	 * Logout user
-	 * @return None
-	 */
-	public function logout() {
-	   session_destroy();
+    /**
+     * Logout user
+     * @return None
+     */
+    public function logout() {
+       session_destroy();
 
-	   $prev_month_time = time() - SECONDS_PER_MONTH;
-	   setcookie('login', '', $prev_month_time, '/');
-	   setcookie('passw_hash', '', $prev_month_time, '/');
-	} // logout
+       $prev_month_time = time() - SECONDS_PER_MONTH;
+       setcookie('login', '', $prev_month_time, '/');
+       setcookie('passw_hash', '', $prev_month_time, '/');
+    } // logout
+    
+    
+    /**
+     * Method returns TRUE if user is guest
+     * @return if user not registered returns TRUE,
+     * otherwise returns FALSE 
+     */
+    public function isGuest() {
+        if (self::GUEST === $this->getUserRole()) {
+        	return TRUE;
+        }
+        return FALSE;
+    } // isGuest
 	
 	
+    /**
+     * @return if user is admin returns TRUE,
+     * otherwise returns FALSE.
+     */
+    public function isAdmin() {
+        if (self::ADMINISTRATOR === $this->getUserRole()) {
+            return TRUE;
+        }
+        return FALSE;
+    } // isAdmin
+    
+    
+    /**
+     * @return Method return TRUE if user is registered user
+     * otherwise returns FASLE
+     */
+    public function isRegisteredUser() {
+        if (self::REGISTERED_USER === $this->getUserRole()) {
+            return TRUE;
+        }
+        return FALSE;
+    } // isRegisteredUser
+    
+    
     private function __construct() {
-    	global $db_link;
+        global $db_link;
         $this->db_connection = $db_link;
     } // __construct
+    
     
     private function __clone() {
     }
