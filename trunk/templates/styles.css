@@ -51,3 +51,31 @@
 	text-align: justify;
 	vertical-align: middle;
 }
+
+/* Moisa Dmitry Styles*/
+.table_header{
+	background: #3F65B4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+}
+.message_header{
+	color: #355699;
+	background: #9AAFDC;
+	border: 1px solid #FFFFFF;
+}
+.message_text{
+	color: #000000;
+	background: #CCCCCC;
+	border: 1px solid #FFFFFF;
+}
+.step_line{
+	color:#3F65B4;
+	background: #FFFFFF;
+}
+a {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	color: #3F65B4;
+	text-decoration: none;
+}
+
