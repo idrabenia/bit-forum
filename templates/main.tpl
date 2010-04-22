@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf8" />
+   <meta http-equiv="content-type" content="text/html; charset=utf8" />
     <title>{TITLE}</title>
     <link href="{ROOT_PATH}templates/styles.css" rel="stylesheet" type="text/css" />
     <script language="JavaScript" type="text/javascript" 
@@ -12,9 +12,9 @@
 </head>
 
 <body bgcolor="#FCF1D2">
-    <table>
+    <table width="100%" align="center">
         <tr>
-            <td>
+            <td align="center">
                 <img src="{ROOT_PATH}images/header.png" width="990" />
             </td>
         </tr>
