@@ -55,6 +55,7 @@ function make_admin_panel() {
         '{ROOT_PATH}' => ROOT_PATH,
         '{MIN_LOGIN_SIZE}' => $parameters['MIN_LOGIN_SIZE'],
         '{MAX_LOGIN_SIZE}' => $parameters['MAX_LOGIN_SIZE'],
+        '{MAX_MSG_SIZE}' => $parameters['MAX_MESSAGE_SIZE'],
         '{MIN_PASSWORD_SIZE}' => $parameters['MIN_PASSWORD_SIZE'],
         '{MAX_PASSWORD_SIZE}' => $parameters['MAX_PASSWORD_SIZE'],
             
@@ -130,7 +131,8 @@ function modify_config() {
 	    'avatar_upload' => "/^(ENABLED_AVATARS|DISABLED_AVATARS)$/",
 	    'password_complexity' => "/^(NO_PASSW_COMPLEX"
 	       . "|REGISTER_PASSW_COMPLEX|DIGIT_PASSW_COMPLEX"
-	       . "|DIGIT_REGISTER_PASSW_COMPLEX)$/"
+	       . "|DIGIT_REGISTER_PASSW_COMPLEX)$/",
+	    'max_message_size' => "/^(\d){1,4}$/"
 	);
 	$fields_aliases = array(
 	   'login_size_min' => 'MIN_LOGIN_SIZE', 
@@ -142,7 +144,8 @@ function modify_config() {
 	   'admin_email' => 'ADMINS_EMAIL',
 	   'account_activation' => 'ACCOUNT_ACTIVATION',
 	   'avatar_upload' => 'ENABLED_AVATARS', 
-	   'password_complexity' => 'PASSW_COMPLEXITY'
+	   'password_complexity' => 'PASSW_COMPLEXITY',
+	   'max_message_size' => 'MAX_MESSAGE_SIZE'
 	);
 	
 	foreach ($fields_patterns as $name => $pattern) {
@@ -163,7 +166,7 @@ function modify_config() {
  *         function return TRUE, otherwise FALSE. 
  */
 function is_post_param_correct($param_name, $pattern) {
-    if ( !isset($_POST[$param_name]) ) {    
+    if ( !isset($_POST[$param_name]) ) {  
         return FALSE;
     }
     if ( preg_match( $pattern, $_POST[$param_name] ) !== 1 ) {

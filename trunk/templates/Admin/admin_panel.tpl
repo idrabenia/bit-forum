@@ -15,7 +15,7 @@
 		var formValidator = new FormValidator("form_error");
 	</script>
 	
-	<form method="post" action="." onsubmit="return formValidator.run();" >	
+	<form method="post" action="" onsubmit="return formValidator.run();" >	
 		<input type="hidden" name="action" value="admin_panel" />
 		<table width="100%" border="1" cellpadding="0" cellspacing="0" 
 			   class="options_table">
@@ -139,8 +139,23 @@
 				<span class="error_message" id="admin_email_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp
-						= /^([A-z0-9_\-]+\.)*[A-z0-9_\-]+@([A-z0-9][A-z0-9\-]*[A-z0-9]\.)+[A-z]{2,4}$/
+						= /^([A-Za-z0-9_\-]+\.)*[A-Za-z0-9_\-]+@([A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]\.)+[A-Za-z]{2,4}$/
 					formValidator.addField("admin_email", regExp, "admin_email_error");
+				</script>
+			</td>
+		  </tr>
+		  <tr>
+			<td class="parameter_name">
+				<b>Максимальный размер сообщения</b> <br />
+				<small class="parameter_hint">От 0 символов, до 9999</small>
+			</td>
+			<td class="parameter_value">
+				<input type="text" size="10" name="max_message_size" 
+								   id="max_message_size" value="{MAX_MSG_SIZE}" />
+				<span class="error_message" id="max_message_size_error">&nbsp;&nbsp;</span>
+				<script type="text/javascript">
+					formValidator.addField("max_message_size", /^(\d){1,4}$/,
+							"max_message_size_error");
 				</script>
 			</td>
 		  </tr>
