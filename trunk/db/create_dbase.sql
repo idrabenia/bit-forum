@@ -1,4 +1,4 @@
-
+﻿
 DROP SCHEMA IF EXISTS `bit_forum`;
 CREATE SCHEMA`bit_forum` DEFAULT CHARACTER SET utf8 ;
 USE `bit_forum`;
@@ -222,7 +222,8 @@ INSERT INTO `bit_forum`.`config` (`param_name`, `param_value`,
     ('ENABLED_AVATARS', 'ENABLED_AVATARS', 
         'Включить аватары (ENABLED_AVATARS, DISABLED_AVATARS)'),
     ('IMAGES_PATH', '/images', 'Папка для хранения картинок'),
-    ('ADMINS_EMAIL', 'pivo_est@tut.by', 'Email администратора')
+    ('ADMINS_EMAIL', 'pivo_est@tut.by', 'Email администратора'),
+    ('MAX_MESSAGE_SIZE', '600', 'Максимальный размер одного сообщения')
 ;
 
 
@@ -296,4 +297,3 @@ VALUES (':?:', 'images/smilies/icon_question.gif'),
        (':twisted:', 'images/smilies/icon_twisted.gif'),
        (';)', 'images/smilies/icon_wink.gif')
 ;
-

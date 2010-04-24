@@ -23,67 +23,81 @@ class User
     const REGISTERED_USER = 2;
     const ADMINISTRATOR = 3;
 	
-	/**
-	 * Method return class instance.
-	 * @return authenticator instance 	 
-	 */
+    /**
+     * Method return class instance.
+     * @return authenticator instance 	 
+     */
     public static function getInstance() {
         if (self::$instance === NULL) {
             self::$instance = new User();
         }
-		
+    	
         return self::$instance;
     } // getInstance
-	
-	
-	/**
-	 * Method get user nickname
-	 * @return if user registered returns user nickname,
-	 * otherwise returns FALSE
-	 */
+    
+    
+    /**
+     * Method get user nickname
+     * @return if user registered returns user nickname,
+     * otherwise returns FALSE
+     */
     public function getUserNickname() {
-        @session_start();
-        if ( isset($_SESSION['usr_login']) ) {
-            return $_SESSION['usr_login'];
-        }
-        
         $this->loginByCookie();
     	
-        if ( isset($_SESSION['usr_login']) ) {
-            return $_SESSION['usr_login'];
+        @session_start();
+        if ( isset($_SESSION['usr_data']['login']) ) {
+            return $_SESSION['usr_data']['login'];
         }
         
         return FALSE;
     } // getUserNickname
-	
-	
-	/**
-	 * Method get user role
+    
+    
+    /**
+     * Method get user role
      * @return current user role (Authenticator::GUEST,
      * Authenticator::ADMINISTRATOR, 
      * Authenticator::REGISTERED_USER)  
      */
     public function getUserRole() {
+        $this->loginByCookie();
+        
         @session_start();
-        if ( isset($_SESSION['usr_login'])
-                && isset($_SESSION['usr_role']) ) {
-           return (int)$_SESSION['usr_role'];        
+        if ( isset($_SESSION['usr_data']['role']) ){
+           return (int)$_SESSION['usr_data']['role'];        
         }
         
-        return $this->loginByCookie();
+        return self::GUEST; 
     } // getUserRole
+    
+    
+    /**
+     * Method get current user id
+     * @return If user registered returns his id,
+     * otherwise returns FALSE
+     */
+    public function getUserId() {
+        $this->loginByCookie();
+    	
+        @session_start();
+        if ( isset($_SESSION['usr_data']['id']) ) {
+            return (int)$_SESSION['usr_data']['id'];
+        }
+        
+        return FALSE;
+    }
 	
 	
-	/**
-	 * Function for login users. Function check
-	 * correctness of arguments and block SQL-injection.
-	 * @param $nickname user login (string)
-	 * @param $password user password (string)
-	 * @param $remember need to remember user (TRUE, FALSE)
-	 * @return current user role (Authenticator::GUEST,
-	 * Authenticator::ADMINISTRATOR, 
-	 * Authenticator::REGISTERED_USER)  
-	 */
+    /**
+     * Function for login users. Function check
+     * correctness of arguments and block SQL-injection.
+     * @param $nickname user login (string)
+     * @param $password user password (string)
+     * @param $remember need to remember user (TRUE, FALSE)
+     * @return current user role (Authenticator::GUEST,
+     * Authenticator::ADMINISTRATOR, 
+     * Authenticator::REGISTERED_USER)  
+     */
     public function login(&$nickname, &$password, 
             &$remember = FALSE) 
     {
@@ -102,15 +116,18 @@ class User
         }
 
         // get user role
-        $role = $this->getRoleForUser($nickname, $password_hash);
+        $data = $this->getUserDataFromDb($nickname, $password_hash);
+        $role = $data['role'];
+        
         if ($role === self::GUEST) {
        	    return $role;
         }
       
         // save current user data in session
         @session_start();
-        $_SESSION['usr_login'] = $nickname;
-        $_SESSION['usr_role'] = $role;
+        //$_SESSION['usr_login'] = $nickname;
+        //$_SESSION['usr_role'] = $role;
+        $_SESSION['usr_data'] = $data;
    
         // if remember flag set
         if (TRUE === $remember) {
@@ -217,12 +234,14 @@ class User
     /**
      * Method search in database login and password.
      * Arguments must be verified.
-     * @return user role
+     * @return array( 'id' => val1, 'role' => val2,
+     * 'login' => val3 ) for regestered users, and
+     * array( 'role' => val4 ) for guests.  
      */
-    private function getRoleForUser($nickname, 
+    private function getUserDataFromDb($nickname, 
             $passw_hash) {
         $result = mysql_query(
-            "SELECT `usr_role` "
+            "SELECT `usr_id`, `usr_login`, `usr_role`"
            . "FROM `users` "
            . "WHERE `usr_login` = '$nickname' " 
            . "  AND `usr_password_hash` = '$passw_hash' ",
@@ -231,11 +250,17 @@ class User
         // if searching user not exist
         if (mysql_num_rows($result) !== 1) {
             // return current role
-            return self::GUEST;
+            $data = array( 'role' => self::GUEST );
+            return $data;
         }
                
         $row = mysql_fetch_assoc($result);
-        return (int)$row['usr_role'];
+        $data = array(
+            'id' => (int)$row['usr_id'],
+            'login' => $row['usr_login'],
+            'role' => (int)$row['usr_role']
+        );
+        return $data;
     } // checkNickAndPasswHash 
     
     
@@ -277,24 +302,29 @@ class User
      * method send user attributes to session
      * @return user role
      */
-    private function loginByCookie() {        
+    private function loginByCookie() {      
+        if ( isset($_SESSION['usr_data']) ) {
+            //return (int)$_SESSION['usr_data']['role'];
+            return;
+        }
+    	
         if ( !$this->hasValidNickname( $_COOKIE['login'] ) 
             || !$this->hasValidPassword( $_COOKIE['passw_hash'] ) )
         {
-            return self::GUEST;    	
+            return; //self::GUEST;    	
         }
 
         $nickname = $_COOKIE['login'];
         $passw_hash = $_COOKIE['passw_hash'];
-        $role = $this->getRoleForUser($nickname, $passw_hash);
+        $data = $this->getUserDataFromDb($nickname, $passw_hash);
+        $role = (int)$data['role'];
            
         // if user has account
         if ($role !== self::GUEST) {
             // save user attributes in session 
-            $_SESSION['usr_login'] = $nickname;
-            $_SESSION['usr_role'] = $role;
+            $_SESSION['usr_data'] = $data;
         }    
-        return $role;
+        return; //$role;
     } // loginByCookie
     
     
