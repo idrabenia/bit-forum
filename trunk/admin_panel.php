@@ -185,9 +185,9 @@ function is_post_param_correct($param_name, $pattern) {
 function update_config($name, $value) {
 	global $db_link;
     $db_connect = $db_link;	
-	
-	$name = mysql_escape_string($name);
-	$value = mysql_escape_string($value);
+    
+    $name = mysql_escape_string($name);
+    $value = mysql_escape_string($value);
     mysql_query(
         "UPDATE `config` "
         . "SET `param_value`='$value' "
