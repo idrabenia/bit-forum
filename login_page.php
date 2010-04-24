@@ -53,8 +53,8 @@ function make_login_page() {
 function login_user($db_connect = FALSE) {
     if (FALSE === $db_connect) {
         $db_connect = connect_to_database();
-	}
-	
+    }
+    
     $auth = User::getInstance($db_connect);
     $remember = (isset($_POST['has_remember']))? TRUE : FALSE; 
     $auth->login($_POST['nickname'], $_POST['password'], $remember);
