@@ -18,11 +18,11 @@ define('SECONDS_PER_MONTH', 60 * 60 * 24 * 30);
  */
 class User
 {
-	// User roles
+    // User roles
     const GUEST = 1;
     const REGISTERED_USER = 2;
     const ADMINISTRATOR = 3;
-	
+    
     /**
      * Method return class instance.
      * @return authenticator instance 	 
@@ -31,7 +31,7 @@ class User
         if (self::$instance === NULL) {
             self::$instance = new User();
         }
-    	
+        
         return self::$instance;
     } // getInstance
     
@@ -43,7 +43,7 @@ class User
      */
     public function getUserNickname() {
         $this->loginByCookie();
-    	
+        
         @session_start();
         if ( isset($_SESSION['usr_data']['login']) ) {
             return $_SESSION['usr_data']['login'];
@@ -78,7 +78,7 @@ class User
      */
     public function getUserId() {
         $this->loginByCookie();
-    	
+        
         @session_start();
         if ( isset($_SESSION['usr_data']['id']) ) {
             return (int)$_SESSION['usr_data']['id'];
@@ -86,8 +86,8 @@ class User
         
         return FALSE;
     }
-	
-	
+    
+    
     /**
      * Function for login users. Function check
      * correctness of arguments and block SQL-injection.
@@ -103,15 +103,15 @@ class User
     {
         // check nickname and password correction
         if ( !$this->hasValidNickname($nickname)
-       	        && !$this->hasValidPassword($password) ) {
-       	    $this->logout();
-       	    return self::GUEST;
+                && !$this->hasValidPassword($password) ) {
+            $this->logout();
+            return self::GUEST;
         }
    
         // compute hash for user password
         $password_hash = $this->hashPassword($nickname, $password);
         if (FALSE === $password_hash) {
-        	$this->logout();
+            $this->logout();
             return self::GUEST;
         }
 
@@ -120,7 +120,7 @@ class User
         $role = $data['role'];
         
         if ($role === self::GUEST) {
-       	    return $role;
+            return $role;
         }
       
         // save current user data in session
@@ -158,12 +158,12 @@ class User
      */
     public function isGuest() {
         if (self::GUEST === $this->getUserRole()) {
-        	return TRUE;
+            return TRUE;
         }
         return FALSE;
     } // isGuest
-	
-	
+    
+    
     /**
      * @return if user is admin returns TRUE,
      * otherwise returns FALSE.
@@ -204,10 +204,10 @@ class User
      * otherwise FALSE. 
      */
     private function hasValidNickname(&$nickname) {
-    	if (!isset($nickname)) {
-    		return FALSE;
-    	}
-    	
+        if (!isset($nickname)) {
+            return FALSE;
+        }
+        
         $nickname = trim($nickname); 
         $has_valid_nick = preg_match("/^([\w_]{1,100})$/", 
            $nickname);        
@@ -221,9 +221,9 @@ class User
      * otherwise FALSE. 
      */
     private function hasValidPassword(&$password) {
-    	if (!isset($password)) {
-    		return FALSE;
-    	}
+        if (!isset($password)) {
+            return FALSE;
+        }
         $password = trim($password); 
         $has_valid_passw = preg_match("/^([\w_]{0,100})$/", 
             $password);        
@@ -269,7 +269,7 @@ class User
      * user, if user account not found returns FALSE.
      */
     private function hashPassword($nickname, $password) {
-    	// fetch password hash salt from db
+        // fetch password hash salt from db
         $result = mysql_query(
            "SELECT `usr_security_salt` " 
            . "FROM `users` "
@@ -293,7 +293,7 @@ class User
         // save user attributes in cookie
         $next_month_time = time() + SECONDS_PER_MONTH;
         setcookie('login', $nickname, $next_month_time, '/');
-        setcookie('passw_hash', $passw_hash, $next_month_time, '/');            
+        setcookie('passw_hash', $passw_hash, $next_month_time, '/');
     } // rememberUser
    
     
@@ -307,11 +307,11 @@ class User
             //return (int)$_SESSION['usr_data']['role'];
             return;
         }
-    	
+        
         if ( !$this->hasValidNickname( $_COOKIE['login'] ) 
             || !$this->hasValidPassword( $_COOKIE['passw_hash'] ) )
         {
-            return; //self::GUEST;    	
+            return; //self::GUEST;    
         }
 
         $nickname = $_COOKIE['login'];

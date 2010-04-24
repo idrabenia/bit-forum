@@ -103,19 +103,19 @@ function insert_smilies($message) {
     static $smilies = FALSE;
     
     // if smilies not cashed
-    if ($smilies === FALSE) {    	
+    if ($smilies === FALSE) {    
         // get smilies from databse
         $results = mysql_query(
-	       "SELECT `smile_alias`, `smile_image_path` " 
-	       . "FROM `smilies` ",
-	       $db_connection)
-	       or die('Could not fetch data from database');
-	
+           "SELECT `smile_alias`, `smile_image_path` " 
+           . "FROM `smilies` ",
+           $db_connection)
+           or die('Could not fetch data from database');
+    
         $smilies = array();
-	    while ($cur_smile = mysql_fetch_assoc($results)) {
-	        $image_path = ROOT_PATH.$cur_smile['smile_image_path'];
-	        $smilies[ $cur_smile['smile_alias'] ] = $image_path;
-	    }
+        while ($cur_smile = mysql_fetch_assoc($results)) {
+            $image_path = ROOT_PATH.$cur_smile['smile_image_path'];
+            $smilies[ $cur_smile['smile_alias'] ] = $image_path;
+        }
     } // if
     
     // Replace smilies aliases to image paths
