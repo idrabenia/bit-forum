@@ -41,6 +41,16 @@ require_once('login_page.php');
 //    	   .$_SERVER['PHP_SELF']."?action=admin_panel");
 //} 
 
+echo <<<EOL
+    Hello, 
+    World
+    !
+    !
+    !
+EOL;
+
+exit();
+
 if (User::getInstance()->isAdmin()) {
     header("Location: http://".$_SERVER['HTTP_HOST']
             ."/admin_panel.php");
