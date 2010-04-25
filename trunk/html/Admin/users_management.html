@@ -7,7 +7,34 @@
 </head>
 
 <body>
-<form id="form1" name="user1_check" method="post" action="">
+    <table> <!-- Table for input search keywords -->
+	  <tr>
+        <td colspan="2">
+          Введите логин пользователя
+        </td>
+      </tr>
+      <tr>
+        <form action="" method="post">
+          <td>
+            <input type="text" name="keywords" value="{KEYWORDS}" />
+		  </td>
+		  <td>
+            <input type="submit" name="submit" value="Искать" />
+		  </td>
+        </form>
+      </tr>
+    </table>
+
+    <!-- Navigation table -->
+    <table align="center" >
+      <tr>
+        <td> <a href="">Назад</a> </td>
+        <td> <a href="">Начало</a> </td>
+        <td> <a href="">Вперёд</a> </td>
+      </tr>
+    </table>
+
+    <form id="form1" name="user1_check" method="post" action="">
 	<table class="options_table"  width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <tr>
 		<th width="22%" class="parameter_name" scope="col"><b>Логин</b></th>

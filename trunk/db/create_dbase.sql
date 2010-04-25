@@ -9,6 +9,7 @@ USE `bit_forum`;
 CREATE  TABLE IF NOT EXISTS `bit_forum`.`users` (
   `usr_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'User id' ,
   `usr_login` VARCHAR(150) NOT NULL COMMENT 'User Name' ,
+  `usr_registr_date` INT NOT NULL COMMENT 'Date of user registration', 
   `usr_password_hash` TEXT NOT NULL ,
   `usr_email` TEXT NOT NULL ,
   `usr_role` INT NOT NULL COMMENT 'Access status of user. 1-- GUEST, 2 -- REGISTERED_USER, 3 -- ADMINISTRATOR.' ,
@@ -25,9 +26,10 @@ CREATE UNIQUE INDEX `usr_login_ind` USING BTREE ON `bit_forum`.`users` (`usr_log
 
 
 -- Create admin account with login='root' password='' 
-INSERT INTO `bit_forum`.`users` (`usr_login`, `usr_email`, `usr_password_hash`,
-    `usr_role`, `usr_security_salt`)
-VALUES ('root', '', SHA1( CONCAT(SHA1(''), 'qkdu') ), 3, 'qkdu')
+INSERT INTO `bit_forum`.`users` (`usr_login`, `usr_registr_date`, `usr_email`, 
+    `usr_password_hash`, `usr_role`, `usr_security_salt`)
+VALUES 
+  ('root', UNIX_TIMESTAMP('2010-10-04 22:23:00'), '', SHA1( CONCAT(SHA1(''), 'qkdu') ), 3, 'qkdu')
 ;
 
 -- -----------------------------------------------------

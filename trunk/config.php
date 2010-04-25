@@ -24,6 +24,6 @@ define('DEBUG', TRUE);
 $db_link = FALSE;
 
 /** Path to main page template */
-define('MAIN_TPL_PATH', 'templates/main.tpl');
+define('MAIN_TPL_PATH', './templates/main.tpl');
 
 ?>
