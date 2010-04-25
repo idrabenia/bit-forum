@@ -6,7 +6,7 @@
         </td>
       </tr>
       <tr>
-        <form action="" method="post">
+        <form action="{CUR_PAGE_URL}" method="post">
           <td>
             <input type="text" name="keywords" value="{KEYWORDS}" />
           </td>
