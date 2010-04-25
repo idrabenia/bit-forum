@@ -10,15 +10,16 @@ require_once('common.php');
 require_once('includes/authorization.php');
 
 /** Count of posts on page */
-define('PAGE_SIZE', 30);
+define('PAGE_SIZE', 10);
 
 define('PAGE_TEMPLATES_FILE', './templates/Admin/users_table.tpl');
 
 /** Mask for test odd number or not */
 define('PARITY_MASK', 1);
 
-
+//echo get_pages_count('');
 echo make_page();
+//echo "hello";
 
 
 function make_page() {
@@ -31,15 +32,21 @@ function make_page() {
         "/{(NOT_ODD_ROW)}(.*){EOT}/Us"
     ));
     
-    // create rows for users table
-    $page_num = 0;
-    if ( isset($_REQUEST['page_num']) ) {
-        $page_num = (int)$_REQUEST['page_num'];
-    }
-    
+    // create rows for users table    
     $keywords = '';
     if ( isset($_REQUEST['keywords']) ) {
         $keywords = $_REQUEST['keywords'];
+    }
+    
+    $page_num = 0;
+    if ( isset($_REQUEST['page_num']) ) {
+        $page_num = (int)$_REQUEST['page_num'];
+        
+        // check page number interval
+        if ((get_pages_count($keywords)<=$page_num)
+            ||(0>$page_num)) {
+            $page_num = 0;
+        }
     }
     
     $users = get_user_data($keywords, $page_num);
@@ -75,12 +82,59 @@ function make_page() {
         $table_rows .= $cur_row;
     }
     
+    // create navigation bar
+    $bar = $templates['NAVIGATION_BAR'];
+    $link_tpl = $templates['LINK'];
+    
+    // create link to previous page
+    $prev_link = '';
+    if (0!==$page_num) {
+        $prev_link = $link_tpl;
+        replace_holders($prev_link, array(
+            '{PAGE_DESC}' => 'Previuos',
+            '{PAGE_LINK}' => $_SERVER['PHP_SELF']
+                ."?page_num=".($page_num - 1)
+                ."&keywords=".rawurlencode($keywords)
+        ));
+    }
+    
+    // create link to start page
+    $start_link = '';
+    if (1<=$page_num) {
+        $start_link = $link_tpl;
+        replace_holders( $start_link, array(
+            '{PAGE_DESC}' => 'Start',
+            '{PAGE_LINK}' => $_SERVER['PHP_SELF']
+                . "?page_num=0"
+                . "&keywords=".rawurlencode($keywords)
+        ) );
+    }
+    
+    // create link to next page
+    $next_link = '';
+    if ($page_num<get_pages_count($keywords)-1) {
+        $next_link = $link_tpl;
+        replace_holders($next_link, array(
+            '{PAGE_DESC}' => 'Next',
+            '{PAGE_LINK}' => $_SERVER['PHP_SELF']
+                . "?page_num=".($page_num + 1)
+                . "&keywords=".rawurlencode($keywords)
+        ));
+    }
+    
+    replace_holders($bar, array(
+        '{PREV_PAGE}' => $prev_link,
+        '{START_PAGE}' => $start_link,
+        '{NEXT_PAGE}' => $next_link
+    ));
+    
     // insert users table to page template
     $table = $templates['USER_LIST_PAGE'];
     replace_holders($table, array(
         '{TABLE_ROWS}' => $table_rows,
         '{KEYWORDS}' => $keywords,
-        '{NAVIGATION_TABLE}' => ''
+        '{NAVIGATION_TABLE}' => $bar, 
+        '{CUR_PAGE_URL}' => $_SERVER['PHP_SELF']
     ));
     
     // insert page template to main page
@@ -153,7 +207,37 @@ function get_user_data($keyword = '', $page_num = 0) {
     }
     
     return $users;
-}
+} // get_user_data
+
+
+/**
+ * Function returns count of pages that need to show
+ * all results of search
+ * @param $keywords keyswords for user search login
+ * @return (int) count of pages that need to show 
+ * search results
+ */
+function get_pages_count($keywords = '') {
+    global $db_link;
+    static $count_cash = FALSE;
+    
+    if ($count_cash!==FALSE) {
+    	return $count_cash;
+    }
+    
+    $result = mysql_query(
+        "SELECT COUNT(*) FROM `users` WHERE `usr_login` "
+        . "LIKE '%".mysql_escape_string($keywords)."%'", 
+        $db_link);
+        
+    $row = mysql_fetch_row($result);
+    
+    $rows_count = (int)$row[0]; 
+    $pages_count = ceil($rows_count / PAGE_SIZE);
+    
+    $counts = $pages_count;
+    return $pages_count;
+} // get_pages_count
 
 
 ?>
