@@ -1,23 +1,25 @@
 <table width="95%" align="center">
   <tr class="step_line">
-    <td ><a href="Index.html">Forums</a> &gt;&gt;<a href="Topic.html">Topics</a>&gt;&gt;{TOPIC_TITLE}</td>
+    <td ><a href="view_forums.php">Forums</a> &gt;&gt;<a href="view_topics.php">Topics</a>&gt;&gt;{TOPIC_TITLE}</td>
   </tr>
 </table>
-<table width="95%" align="center">
-  <tr class="table_header">
-    <td align="center">Author</td>
-    <td colspan="2" align="center">Message</td>
+<table width="95%" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+	<td>{TABLE_HEADER}</td>
   </tr>
-  {MESSAGE_TABLE}
-  <tr class="message_header">
-    <td colspan="3">&nbsp;</td>
+  <tr>
+	<td>{WHAT_TO_SHOW}</td>
   </tr>
-  <tr class="table_header">
-    <td colspan="3">&nbsp;</td>
+  <tr>
+    <td>
+		<table width="100%" cellspacing="1"><tr class="message_header"><td>&nbsp;</td> </tr></table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" cellspacing="1"><tr class="table_header"><td>&nbsp;</td></tr></table></td>
   </tr>
 </table>
 <table width="95%" align="center">
   <tr class="step_line">
-    <td ><a href="Index.html">Forums</a> &gt;&gt;<a href="Topic.html">Topics</a>&gt;&gt;{TOPIC_TITLE}</td>
+    <td ><a href="view_forums.php">Forums</a> &gt;&gt;<a href="view_topics.php">Topics</a>&gt;&gt;{TOPIC_TITLE}</td>
   </tr>
 </table>
