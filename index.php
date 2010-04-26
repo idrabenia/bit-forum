@@ -5,7 +5,9 @@ require_once('includes/message_parser.php');
 require_once('includes/authorization.php');
 require_once('login_page.php');
 
-
+echo '<a href="view_topics.php">View topics</a>'.'<br/>';
+echo '<a href="view_posts.php">View posts</a>'.'<br/>';
+echo '<a href="view_forums.php">View forums</a>'.'<br/>';
 //$auth = User::getInstance();
 //$action_type = ( isset($_REQUEST['action']) )? $_REQUEST['action'] 
 //    : '';
