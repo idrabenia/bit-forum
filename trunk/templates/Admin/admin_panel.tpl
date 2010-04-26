@@ -1,3 +1,6 @@
+
+    <a href="view_forums.php">На главную</a> 
+    <a href="users_list.php">Пользователи</a>
     <p align="center" class="error_message" id="form_error"></p>
     <script language="javascript" type="text/javascript">
         var formValidator = new FormValidator("form_error");

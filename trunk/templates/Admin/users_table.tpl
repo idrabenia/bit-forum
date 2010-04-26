@@ -1,4 +1,7 @@
 {USER_LIST_PAGE}
+    <a href="view_forums.php">На главную</a> 
+    <a href="admin_panel.php">Страница администратора</a>
+
     <table> <!-- Table for input search keywords -->
       <tr>
         <td colspan="2">

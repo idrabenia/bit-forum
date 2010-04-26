@@ -1,3 +1,4 @@
+<a href="view_forums.php">На главную</a>
 <table align="center" height="400"> <tr> <td>
 <form action="" method="post">
     <table class="options_table" width="269" height="92" border="0" cellpadding="3" 
