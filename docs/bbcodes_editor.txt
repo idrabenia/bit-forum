@@ -1,0 +1,26 @@
+﻿Файл: includes/message_parser.php
+
+Функции форматирования сообщений:
+
+1)
+    ИМЯ: user_message_to_html($message)
+
+    ОПИСАНИЕ: Функция заменяет все bbcodes в строке на соответствующие
+    html теги.
+    ПАРАМЕТРЫ: $message строка, которая содержит bbcodes
+
+    ВОЗВРАЩАЕМОЕ ЗНАЧЕНИЕ: строка, в которой все bbcodes и  
+    смайлы заменены на html теги.
+
+    ПРИМЕР:
+    $test_message = "[i]Hello[/i], [b]<hr /> [b]Ilya[/b]! :) \r\n"
+        . " How[/b] do [b]you[/b] do :?: \n"
+        . "[url=http://google.com]URL[/url] \r"
+        . "[img]/images/Avatars/20321.jpg[/img]"
+        . "[url]http://google.com[/url] \r\n"
+        . "Cheese:  :arrow:  :D  :?  8)  :cry:  8O  :evil: "
+        . " :!:  :(  :idea:  :lol:  :x  :mrgreen:  :|  :?: "
+        . " :P  :oops:  :roll:  :(  :(  :)  :o  :twisted:  ;)";
+        
+    $html_msg = user_message_to_html( $test_message );
+    echo $html_msg; // выводим html, соответствующий $test_message
