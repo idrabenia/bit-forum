@@ -1,8 +1,7 @@
 <?php
-require_once ("config.php");
+require_once ("common.php");
 	
-$lnk = mysql_connect('localhost', 'root', '1');
-mysql_select_db('bit_forum', $lnk);
+$lnk = $db_link;
 $current_user=2;
 
 function get_form($tpl, $row, $lnk)
@@ -43,7 +42,7 @@ $top_tpl=$head.$template;
 
 $tab_tpl = str_replace('{TABLE_HEADER}',$tabhead_tpl, $tab_tpl);
 $tab_tpl = str_replace('{WHAT_TO_SHOW}',$top_tpl, $tab_tpl);
-$main_tpl = str_replace('{ROOT_PATH}', '/bit-forum/', $main_tpl);
+$main_tpl = str_replace('{ROOT_PATH}', /*'/bit-forum/'*/ ROOT_PATH, $main_tpl);
 $main_tpl = str_replace('{BODY}', $tab_tpl.$form_tpl, $main_tpl);
 	
 echo $main_tpl;
