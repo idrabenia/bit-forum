@@ -3,7 +3,7 @@
 /**
  * File content functions for represent
  * login page.
- */
+ */  
 
 require_once('common.php');
 require_once('includes/authorization.php');
