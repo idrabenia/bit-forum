@@ -11,11 +11,11 @@
     </script>
 </head>
 
-<body bgcolor="#FCF1D2">
+<body bgcolor="#FFFFFF">
     <table width="100%" align="center">
         <tr>
             <td align="center">
-                <img src="{ROOT_PATH}images/header.png" width="990" />
+                <img src="{ROOT_PATH}images/logo.gif" width="990" />
             </td>
         </tr>
         <tr>
