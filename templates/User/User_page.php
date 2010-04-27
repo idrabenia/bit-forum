@@ -5,19 +5,19 @@
 	
 	function get_form($tpl, $row)
 	{
-		$tpl = str_replace('{IN_FIRST_NAME}','', $tpl);
-		$tpl = str_replace('{IN_LAST_NAME}','', $tpl);
+		$tpl = str_replace('{IN_FIRST_NAME}',$row["usr_first_name"], $tpl);
+		$tpl = str_replace('{IN_LAST_NAME}',$row["usr_last_name"], $tpl);
 		$tpl = str_replace('{IN_CURRPASSWORD}','', $tpl);
 		$tpl = str_replace('{IN_NEWPASSWORD}','', $tpl);
 		$tpl = str_replace('{IN_CONFPASSWORD}','', $tpl);
 		$tpl = str_replace('{IN_EMAIL}',$row["usr_email"], $tpl);
-		$tpl = str_replace('{IN_MOBILE}','', $tpl);
+		$tpl = str_replace('{IN_MOBILE}',$row["usr_mobile"], $tpl);
 		 
-		$tpl = str_replace('{IN_ICQ}','', $tpl);
-		$tpl = str_replace('{IN_URL}','', $tpl);
-		$tpl = str_replace('{IN_COUNTRY}','', $tpl);
-		$tpl = str_replace('{IN_INTERESTS}','', $tpl);
-		$tpl = str_replace('{IN_ABOUT}','', $tpl);
+		$tpl = str_replace('{IN_ICQ}',$row["usr_icq"], $tpl);
+		$tpl = str_replace('{IN_URL}',$row["usr_url"], $tpl);
+		$tpl = str_replace('{IN_COUNTRY}',$row["usr_country"], $tpl);
+		$tpl = str_replace('{IN_INTERESTS}',$row["usr_interests"], $tpl);
+		$tpl = str_replace('{IN_ABOUT}',$row["usr_about"], $tpl);
 		return $tpl;
 	} 
 	
@@ -26,18 +26,43 @@
 	
 	$user_page = file_get_contents('user_page.tpl');
 	
-	$id = 44;
+	$id = 49;
 	$sql = "SELECT * FROM users WHERE usr_id = $id";
 	$r = mysql_query($sql, $lnk);
-	//echo '<br>'.$sql.'<br>';
-	//echo $r;
+		
 	$row = mysql_fetch_assoc($r);
-	//echo $row["usr_email"];
+	
 	$out_tpl = '';
 	$out_tpl = $out_tpl.get_form($user_page, $row);
 	echo $out_tpl;
 	
+	if ($_POST)
+	{
+	
+	$in_first_name = $_POST["in_first_name"];
+	$in_last_name = $_POST["in_last_name"];
+	$in_email = $_POST["in_email"];
+	$in_url = $_POST["in_url"];
+	$in_icq = $_POST["in_icq"];
+	$in_mobile = $_POST["in_mobile"];
+	$in_about = $_POST["in_about"];
+	$in_interests = $_POST["in_interests"];
+	$in_country = $_POST["in_country"];
 	
 	
-
+	$sql="UPDATE users 	SET usr_first_name ='$in_first_name',
+							usr_last_name = '$in_last_name',
+							usr_email = '$in_email',
+							usr_url= '$in_url',
+							usr_icq= '$in_icq',
+							usr_mobile= '$in_mobile',
+							usr_country = '$in_country',
+							usr_interests= '$in_interests',							
+							usr_about= '$in_about'
+						where usr_id = '$id'";
+	//echo '<br>'.$sql.'<br>';
+	//mysql_query($sql, $lnk);
+	//echo mysql_errno($lnk).":".mysql_error($lnk);
+	}
+	
 ?>

@@ -16,7 +16,7 @@
 
 	<td ><a href="Index.html">Main page</a> &gt;&gt;<a href="Rules.html">Rules</a>&gt;&gt;Registration</td>
 
-<form id="form1" name="user_reg" method="post" action="user.php">
+<form id="form1" name="user_reg" method="post" action="user_reg.php">
 	<table class="options_table"  width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <tr>
 			<td colspan="2" align="center" class="parameter_name">
@@ -55,7 +55,7 @@
 			<b>First Name</b>
 		</td>
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_firstname" value="" id="in_first_name" />		
+			<input type="text" name="in_first_name" value="" id="in_first_name" />		
 			<span class="error_message" id="in_first_name_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp = /^([A-Za-z])+$/
@@ -68,7 +68,7 @@
 			<b>Last Name</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_lastname" value="" id="in_last_name" />
+			<input type="text" name="in_last_name" value="" id="in_last_name" />
 			<span class="error_message" id="in_last_name_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp = /^([A-Za-z])+$/
@@ -95,7 +95,7 @@
 			<b>Confirm Password</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_password2" value="" id="password2" />
+			<input type="text" name="in_password2" value="" id="in_password2" />
 			<span class="error_message" id="in_password2_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp
