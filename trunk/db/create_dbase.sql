@@ -1,13 +1,15 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.3.2
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Апр 27 2010 г., 14:38
+-- Время создания: Апр 27 2010 г., 15:53
 -- Версия сервера: 5.1.30
 -- Версия PHP: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+CREATE DATABASE `bit_forum`;
+USE `bit_forum`;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -227,19 +229,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usr_email` text NOT NULL,
   `usr_role` int(11) NOT NULL COMMENT 'Access status of user. 2 -- REGISTERED_USER, 3 -- ADMINISTRATOR.',
   `usr_security_salt` varchar(100) NOT NULL COMMENT 'Random string for add to hash. It mask hash.',
-  `usr_icq` varchar(9) NOT NULL COMMENT 'user''s icq number',
-  `usr_url` text NOT NULL COMMENT 'personal page of user',
-  `usr_first_name` text NOT NULL COMMENT 'user''s first name',
-  `usr_last_name` text NOT NULL COMMENT 'user''s last name',
-  `usr_mobile` text NOT NULL COMMENT 'user''s mobile phone number',
-  `usr_interests` text NOT NULL COMMENT 'user''s interests, hobbies',
-  `usr_about` text NOT NULL COMMENT 'few words about user',
-  `usr_country` text NOT NULL COMMENT 'user''s country',
+  `usr_icq` varchar(9) DEFAULT NULL COMMENT 'user''s icq number',
+  `usr_url` text COMMENT 'personal page of user',
+  `usr_first_name` text COMMENT 'user''s first name',
+  `usr_last_name` text COMMENT 'user''s last name',
+  `usr_mobile` text COMMENT 'user''s mobile phone number',
+  `usr_interests` text COMMENT 'user''s interests, hobbies',
+  `usr_about` text COMMENT 'few words about user',
+  `usr_country` text COMMENT 'user''s country',
   PRIMARY KEY (`usr_id`),
   UNIQUE KEY `usr_login_ind` (`usr_login`) USING BTREE,
   UNIQUE KEY `usr_password_hash_ind` (`usr_password_hash`) USING BTREE,
   KEY `usr_id_ind` (`usr_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='User information' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='User information' AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `users`
@@ -247,7 +249,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`usr_id`, `usr_login`, `usr_registr_date`, `usr_password_hash`, `usr_email`, `usr_role`, `usr_security_salt`, `usr_icq`, `usr_url`, `usr_first_name`, `usr_last_name`, `usr_mobile`, `usr_interests`, `usr_about`, `usr_country`) VALUES
 (1, 'root', 1286220180, 'a4de5937ba273624e21a9bb17ecf3ffb6711ba9e', '', 3, 'qkdu', '', '', '', '', '', '', '', ''),
-(2, 'test1', 1262560462, 'eadc2450abde4fca24fee8f608d2857cd4147e88', '', 2, 'sdf', '', '', '', '', '', '', '', '');
+(2, 'test1', 1262560462, 'eadc2450abde4fca24fee8f608d2857cd4147e88', '', 2, 'sdf', '', '', '', '', '', '', '', ''),
+(3, 'new_login', 20021020, '123456787654321', 'email', 2, 'abc', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'new_logi', 2002102, '12345677654321', 'emai', 2, 'abc', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'in_login', 20021012, '1234567654321', 'emailo', 2, 'abc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
