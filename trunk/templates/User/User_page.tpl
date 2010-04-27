@@ -13,7 +13,7 @@
 		var formValidator = new FormValidator("form_error");
 	</script>
 
-<form id="form1" name="user_page" method="post" action="">
+<form id="form1" name="user_page" method="post" action="user_page.php">
 	<table class="settings_table"  width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td colspan="2" align="center" class="parameter_name">
@@ -30,11 +30,11 @@
 			<b>First Name</b>
 		</td>
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_firstname" value="{IN_FIRST_NAME}" id="in_firstname" />
-			<span class="error_message" id="in_firstname_error">&nbsp;&nbsp;</span>
+			<input type="text" name="in_first_name" value="{IN_FIRST_NAME}" id="in_first_name" />
+			<span class="error_message" id="in_first_name_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp = /^([A-Za-z])+$/
-					formValidator.addField("in_firstname", regExp, "in_firstname_error");
+					formValidator.addField("in_first_name", regExp, "in_first_name_error");
 				</script>			
 		</td>
 	</tr>
@@ -43,11 +43,11 @@
 			<b>Last Name</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_lastname" value="{IN_LAST_NAME}" id="in_lastname" />
-			<span class="error_message" id="in_lastname_error">&nbsp;&nbsp;</span>
+			<input type="text" name="in_last_name" value="{IN_LAST_NAME}" id="in_last_name" />
+			<span class="error_message" id="in_last_name_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp = /^([A-Za-z])+$/
-					formValidator.addField("in_lastname", regExp, "in_lastname_error");
+					formValidator.addField("in_last_name", regExp, "in_last_name_error");
 				</script>			
 		</td>	
 	</tr>
@@ -105,7 +105,7 @@
 			<b>E-mail</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_url" value="{IN_EMAIL}" id="in_email" />	
+			<input type="text" name="in_email" value="{IN_EMAIL}" id="in_email" />	
 		</td>
 	</tr>
 	<tr>
@@ -113,11 +113,11 @@
 			<b>Mobile</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_icq" value="{IN_MOBILE}" id="in_icq" />
-			<span class="error_message" id="in_icq_error">&nbsp;&nbsp;</span>
+			<input type="text" name="in_mobile" value="{IN_MOBILE}" id="in_mobile" />
+			<span class="error_message" id="in_mobile_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp = /^[0-9]{1,20}$/
-					formValidator.addField("in_icq", regExp, "in_icq_error");
+					formValidator.addField("in_mobile", regExp, "in_mobile_error");
 				</script>			
 		</td>
 	</tr>
@@ -170,7 +170,7 @@
 			<b>Interests</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<textarea type="text" name="in_icq" value="{IN_INTERESTS}" id="in_interests"></textarea>
+			<textarea type="text" name="in_interests" id="in_interests">{IN_INTERESTS}</textarea>
 			
 			
 		</td>
@@ -180,7 +180,7 @@
 			<b>About me</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<textarea type="text" name="in_icq" value="{IN_ABOUT}" id="in_about"></textarea>
+			<textarea type="text" name="in_about" id="in_about">{IN_ABOUT}</textarea>
 			
 			
 		</td>
