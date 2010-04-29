@@ -18,6 +18,7 @@
 		$tpl = str_replace('{IN_COUNTRY}',$row["usr_country"], $tpl);
 		$tpl = str_replace('{IN_INTERESTS}',$row["usr_interests"], $tpl);
 		$tpl = str_replace('{IN_ABOUT}',$row["usr_about"], $tpl);
+		
 		return $tpl;
 	} 
 	
@@ -26,15 +27,14 @@
 	
 	$user_page = file_get_contents('user_page.tpl');
 	
-	$id = 49;
+	$id = 53;
 	$sql = "SELECT * FROM users WHERE usr_id = $id";
 	$r = mysql_query($sql, $lnk);
 		
 	$row = mysql_fetch_assoc($r);
 	
-	$out_tpl = '';
-	$out_tpl = $out_tpl.get_form($user_page, $row);
-	echo $out_tpl;
+	
+	
 	
 	if ($_POST)
 	{
@@ -61,8 +61,29 @@
 							usr_about= '$in_about'
 						where usr_id = '$id'";
 	//echo '<br>'.$sql.'<br>';
-	//mysql_query($sql, $lnk);
+	mysql_query($sql, $lnk);
+	//echo mysql_errno($lnk).":".mysql_error($lnk);
+	
+	if (sha1($_POST["in_currpassword"])==$row["usr_password_hash"] 
+			and strlen($_POST["in_newpassword"])!=0 
+			and strlen($_POST["in_confpassword"])!=0
+			and $_POST["in_confpassword"]==$_POST["in_newpassword"])
+	{
+	echo good;
+	$password = sha1($_POST["in_confpassword"]);
+	$sql="UPDATE users SET usr_password_hash = '$password' where usr_id='$id'";
+	//echo '<br>'.$sql.'<br>';
+	mysql_query($sql, $lnk);
 	//echo mysql_errno($lnk).":".mysql_error($lnk);
 	}
+
+	}
 	
+	$sql = "SELECT * FROM users WHERE usr_id = $id";
+	$r = mysql_query($sql, $lnk);
+	$row = mysql_fetch_assoc($r);
+	
+	$out_tpl = '';
+	$out_tpl = $out_tpl.get_form($user_page, $row);
+	echo $out_tpl;
 ?>
