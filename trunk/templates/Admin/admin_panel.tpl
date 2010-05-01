@@ -1,6 +1,17 @@
-
-    <a href="view_forums.php">На главную</a> 
-    <a href="users_list.php">Пользователи</a>
+	<!-- Menu table -->
+    <table width="100%">
+        <tr>
+			<td>
+				<a href="view_forums.php">На главную</a> 
+				&nbsp;
+				<a href="users_list.php">Пользователи</a>
+			</td>
+			<td align="right">
+				<a href="login_page.php?act=logout">Выход</a>
+			</td>
+		</tr>
+    </table>
+	
     <p align="center" class="error_message" id="form_error"></p>
     <script language="javascript" type="text/javascript">
         var formValidator = new FormValidator("form_error");

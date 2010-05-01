@@ -7,6 +7,9 @@
 
 require_once('config.php');
 
+
+define('MAIN_PAGE', '/view_forums.php');
+
 /**
  * Create connection to database.
  * @return database connection
