@@ -1,6 +1,17 @@
 {USER_LIST_PAGE}
-    <a href="view_forums.php">На главную</a> 
-    <a href="admin_panel.php">Страница администратора</a>
+    <!-- Menu table -->
+    <table width="100%">
+        <tr>
+            <td>
+                <a href="view_forums.php">На главную</a> 
+                &nbsp;
+                <a href="admin_panel.php">Страница администратора</a>
+            </td>
+            <td align="right">
+                <a href="login_page.php?act=logout">Выход</a>
+            </td>
+        </tr>
+    </table>
 
     <table> <!-- Table for input search keywords -->
       <tr>

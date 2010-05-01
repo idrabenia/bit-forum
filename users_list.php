@@ -1,5 +1,4 @@
 <?php
-<?php
 
 /**
  * File contain function for represent and search users
@@ -9,6 +8,7 @@
 
 require_once('common.php');
 require_once('includes/authorization.php');
+require_once('includes/templates_engine.php');
 
 /** Count of posts on page */
 define('PAGE_SIZE', 10);
@@ -149,37 +149,6 @@ function make_page() {
     return $page;
     
 } // show_page
-
-
-/**
- * Function parse files and return templates
- * as array
- * @param path to file with template
- * @param regexp of template. 
- * Ex. "/{(LINK)}(.*){EOT}/Us" 1st mask - key, 
- * 2nd - value.
- * @return array of templates (template_name 
- * => template)
- */
-function get_templates($file_path, $tpl_regexps) {
-    // load templates
-    $tpl_file = file_get_contents($file_path);
-    
-    $templates = array();
-    foreach ($tpl_regexps as $regexp) {
-        preg_match($regexp, $tpl_file, $result);
-        $templates[ $result[1] ] = $result[2];
-    }
-    
-    return $templates;
-} // search_users
-
-
-function replace_holders(&$tpl, $holders_map) {
-    foreach ($holders_map as $holder => $value) {
-        $tpl = str_replace($holder, $value, $tpl);
-    }
-} // replace_holders
 
 
 function get_user_data($keyword = '', $page_num = 0) {

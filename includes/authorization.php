@@ -143,7 +143,7 @@ class User
      * @return None
      */
     public function logout() {
-       session_destroy();
+       unset($_SESSION['usr_data']);
 
        $prev_month_time = time() - SECONDS_PER_MONTH;
        setcookie('login', '', $prev_month_time, '/');
