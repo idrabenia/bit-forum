@@ -1,4 +1,5 @@
 <?php
+<?php
 
 /**
  * File contain function for represent and search users
@@ -61,13 +62,13 @@ function make_page() {
         }
         
         switch ($value['role']) {
-        	case User::REGISTERED_USER:
+            case User::REGISTERED_USER:
                 $role = 'user';
                 break;
-        	case User::ADMINISTRATOR:
+            case User::ADMINISTRATOR:
                 $role = 'administrator';
                 break;
-        	default:
+            default:
                 $role = 'dbase error';
                 break; 	
         }
@@ -222,7 +223,7 @@ function get_pages_count($keywords = '') {
     static $count_cash = FALSE;
     
     if ($count_cash!==FALSE) {
-    	return $count_cash;
+        return $count_cash;
     }
     
     $result = mysql_query(
