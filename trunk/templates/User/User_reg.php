@@ -15,9 +15,12 @@
 		$tpl_first_name =$_POST["in_first_name"];
 		$tpl_last_name	=$_POST["in_last_name"];
 		$tpl_password	=sha1($_POST["in_password1"]);
+		$tpl_confirm  	=sha1($_POST["in_password2"]);
 		$tpl_security	=$_POST["in_email"];
 		$registr_date	=time();
 		
+		if ($tpl_password==$tpl_confirm)
+		{
 		$sql = "INSERT INTO users (
 									`usr_id`,
 									`usr_login`,
@@ -42,6 +45,22 @@
 									
 		//echo '<br>'.$sql.'<br>';
 		mysql_query($sql, $lnk);
+		$error = mysql_errno($lnk);
+		}
+		else
+		{
+		$error = 1;
+		}
+		
+		//echo $error;
+		if (0==$error)
+		{
+		echo "Registration was successful";
+		}
+		else
+		{
+		echo "Registration was unsuccessful";
+		}
 		//echo mysql_errno($lnk).":".mysql_error($lnk);
 	}
 	

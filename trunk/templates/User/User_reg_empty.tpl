@@ -14,7 +14,7 @@
 		var formValidator = new FormValidator("form_error");
 	</script>
 
-	<td ><a href="Index.html">Main page</a> &gt;&gt;<a href="Rules.html">Rules</a>&gt;&gt;Registration</td>
+	<td ><a href="Index.php">Main page</a> &gt;&gt;<a href="Rules.php">Rules</a>&gt;&gt;Registration</td>
 
 <form id="form1" name="user_reg" method="post" action="user_reg.php">
 	<table class="options_table"  width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -81,7 +81,7 @@
 			<b>Password</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_password1" value="" id="in_password1" />		
+			<input type="password" name="in_password1" value="" id="in_password1" />		
 			<span class="error_message" id="in_password1_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp
@@ -95,7 +95,7 @@
 			<b>Confirm Password</b>
 		</td> 
         <td class="parameter_value" scope="col">
-			<input type="text" name="in_password2" value="" id="in_password2" />
+			<input type="password" name="in_password2" value="" id="in_password2" />
 			<span class="error_message" id="in_password2_error">&nbsp;&nbsp;</span>
 				<script type="text/javascript">
 					var regExp
