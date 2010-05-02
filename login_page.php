@@ -3,6 +3,7 @@
 /**
  * File content functions for represent
  * login page.
+ * @author Ilya G. Drobenya
  */  
 
 require_once('common.php');
