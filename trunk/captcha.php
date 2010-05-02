@@ -3,6 +3,7 @@
 /**
  * Current script generate image with 
  * numbers that used as CAPTCHA
+ * @author Ilya G. Drobenya
  */
 
 header("Content-type: image/png");
