@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `pst_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'post id',
   `pst_sender` int(11) NOT NULL COMMENT 'post sender from users',
   `pst_topic` int(11) NOT NULL COMMENT 'topic where this post is from topics',
-  `pst_time` time NOT NULL COMMENT 'time',
+  `pst_time` INT NOT NULL COMMENT 'time',
   `pst_text` text NOT NULL COMMENT 'text of post',
   PRIMARY KEY (`pst_id`),
   KEY `pst_sender` (`pst_sender`,`pst_topic`),
@@ -120,9 +120,12 @@ CREATE TABLE IF NOT EXISTS `post` (
 --
 
 INSERT INTO `post` (`pst_id`, `pst_sender`, `pst_topic`, `pst_time`, `pst_text`) VALUES
-(1, 1, 1, '00:00:00', 'Hard life Hard life Hard life Hard life Hard life Hard life Hard life Hard life Hard life Hard life '),
-(2, 1, 1, '00:00:05', 'ggggggggggggggggggggggggggggg'),
-(3, 1, 3, '00:00:06', 'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
+(1, 1, 1, UNIX_TIMESTAMP('2007-11-30 00:00:00'), 
+  'Hard life Hard life Hard life Hard life Hard life Hard life '
+  'Hard life Hard life Hard life Hard life '),
+(2, 1, 1, UNIX_TIMESTAMP('2007-11-30 00:00:05'), 'ggggggggggggggggggggggggggggg'),
+(3, 1, 3, UNIX_TIMESTAMP('2007-11-30 00:00:06'),
+  'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
 
 -- --------------------------------------------------------
 
