@@ -8,6 +8,8 @@
 -- Версия PHP: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+DROP DATABASE IF EXISTS `bit_forum`;
 CREATE DATABASE `bit_forum`;
 USE `bit_forum`;
 
@@ -317,3 +319,37 @@ ALTER TABLE `topics`
 --
 ALTER TABLE `warning`
   ADD CONSTRAINT `warning_ibfk_1` FOREIGN KEY (`war_uid`) REFERENCES `users` (`usr_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
+  
+  
+/**
+ * Procedure for register users at forum.
+ * Example of usage:
+ * CALL REGISTRATE_USER('test2', 'test2', 'test2@tut.by', 2)
+ */
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `bit_forum`.`REGISTRATE_USER` $$
+
+/* Function for registrate user on forum */
+CREATE PROCEDURE `bit_forum`.`REGISTRATE_USER` (
+  IN login VARCHAR(150), IN passw VARCHAR(100),
+  IN email TEXT, IN role INT)
+  COMMENT 'Function for registrate user on forum'
+BEGIN
+  /* Generate password hash and security salt */
+  DECLARE new_salt VARCHAR(100);
+  DECLARE passw_hash VARCHAR(100);
+
+  SET new_salt = SHA1( RAND() );
+  SET passw_hash = SHA1( CONCAT(SHA1(passw), new_salt) );
+
+  /* Insert new user data into database */
+  INSERT INTO `users` (`usr_login`, `usr_registr_date`, `usr_password_hash`,
+    `usr_email`, `usr_role`, `usr_security_salt`)
+  VALUES
+    (login, UNIX_TIMESTAMP(), passw_hash, email, role, new_salt);
+END $$
+
+DELIMITER ;
