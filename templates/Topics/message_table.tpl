@@ -8,10 +8,10 @@
 		<td width="20%" align="center" >{MESSAGE_DATE}</td>
 	</tr>
 	<tr class="message_text">
-		<td width="20%" align="center"><img src="./images/Avatars/20321.jpg" alt="User avatar" width="94" height="94" /></td>
+		<td width="20%" align="center" valign="top"><img src="./images/Avatars/20321.jpg" alt="User avatar" width="94" height="94" /></td>
 		<td colspan="2" valign="top">{MESSAGE_TEXT}</td>
 	</tr>
-	<form id="form2" name="form2" method="post" action="view_posts.php">
+	<form id="form2" name="form2" method="post" action="view_posts.php?forum={FORUM_ID}&topic={TOPIC_ID}">
 	<tr class="message_text">
 		<td>&nbsp;</td>
 		<td colspan="2" >

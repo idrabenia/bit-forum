@@ -23,7 +23,7 @@ function connect_to_database() {
     return $connection;
 }
 $db_link = connect_to_database(); 
-
+mysql_query("SET NAMES 'utf8'", $db_link);
 
 /** Show errors if necessary */
 if (DEBUG === TRUE) { 

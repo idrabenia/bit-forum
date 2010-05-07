@@ -71,6 +71,8 @@
 .step_line{
 	color:#3F65B4;
 	background: #FFFFFF;
+	font-weight: bold;
+	border: medium solid #3F65B4;
 }
 a {
 	font-family: "Times New Roman", Times, serif;
