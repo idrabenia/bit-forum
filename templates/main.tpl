@@ -14,6 +14,9 @@
 
 <body bgcolor="#FFFFFF">
     <table width="100%" align="center">
+		<tr>
+			<td><a href = "login_page.php">Войти</a></td>
+		</tr>
         <tr>
             <td align="center">
                 <img src="{ROOT_PATH}images/logo.gif" width="990" />

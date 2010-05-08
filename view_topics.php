@@ -4,11 +4,12 @@
 
 	require_once ("common.php");
 	require_once ("bread_crumps.php");
+	require_once ("includes/authorization.php");
 
-	$current_user=2;
+	$current_user=7;
 	
 	//Fill the template for each topic
-	function get_form($tpl, $row, $db_link)
+	function get_form($tpl, $row, $show_del, $db_link)
 	{
 		if (isset($_GET["forum"]))
 			$forum_id=$_GET["forum"];
@@ -26,6 +27,18 @@
 		$res =  mysql_fetch_assoc($r);
 		
 		$tpl = str_replace('{TOPIC_CREATOR}',$res["usr_login"], $tpl);
+		
+		if ($show_del)
+		{
+			$del_tpl = file_get_contents('./templates/Topics/delete_form.tpl');
+			
+			$del_tpl = str_replace('{ACTION}', "view_topics.php?forum=".$forum_id, $del_tpl);
+			$del_tpl = str_replace('{INST_ID}', $row["tpc_id"], $del_tpl);
+			
+			$tpl = str_replace('{DELETE_FORM}', $del_tpl, $tpl);
+		}
+		else
+			$tpl = str_replace('{DELETE_FORM}','', $tpl);
 		
 		return $tpl;
 	} 
@@ -63,11 +76,20 @@
 	    $forum_id=$_GET['forum'];
 
 	//Get request for deleting topic
-	if (isset ($_POST["top_id"]))
+	if (isset ($_POST["inst_id"]))
 	{
-		DeleteTopic($_POST["top_id"], $current_user, $db_link);
+		DeleteTopic($_POST["inst_id"], $current_user, $db_link);
 		header("Location: http://127.0.0.1/bit-forum/view_topics.php?forum=".$forum_id);
 	}
+	
+	//Find out if we should show delete button
+	$show_del = false;
+	$r = mysql_query("SELECT usr_role 
+					  FROM `users` 
+					  WHERE usr_id='$current_user'", $db_link);
+	$row = mysql_fetch_assoc($r);
+	if ($row["usr_role"]==3)
+		$show_del=true;
 
 	//Get all topics for this forum
 	$r = mysql_query("SELECT* from `topics` 
@@ -75,7 +97,7 @@
 					  ORDER BY tpc_id DESC",$db_link);
 	$template='';
 	while ($row = mysql_fetch_assoc($r))
-		$template = $template.get_form($top_tpl, $row, $db_link);
+		$template = $template.get_form($top_tpl, $row, $show_del, $db_link);
 
 	//Empty row in table. Simply for design.	
 	$head='<table width="100%" cellspacing="1"><tr class="message_header"><td>&nbsp;</td> </tr></table>';
@@ -91,7 +113,12 @@
 	$form_tpl = str_replace('{TOPIC_ID}',0, $form_tpl);
 	$form_tpl = str_replace('{ROOTPATH}',ROOT_PATH, $form_tpl);
 	$form_tpl = str_replace('{TITLE}',"Новая тема", $form_tpl);
-
+	
+	$r = mysql_query("SELECT frm_title from `forums` 
+					  WHERE frm_id='$forum_id'", $db_link);
+	$row = mysql_fetch_assoc($r);
+	
+	$main_tpl = str_replace('{TITLE}', "БИТ-форум - ".$row["frm_title"], $main_tpl);
 	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
 	$main_tpl = str_replace('{BODY}', $crumps_tpl.$tab_tpl.$crumps_tpl.$form_tpl, $main_tpl);
 
