@@ -77,6 +77,10 @@ function replace_bbcodes($message) {
         array(
             'pattern' => "/(\[url=)(.*)(\])(.*)(\[\/url\])/XU",
             'replacement' => "<a href=\"$2\">$4</a>"
+        ),
+        array(
+            'pattern' => "/(\[quote\])(.*)(\[\/quote\])/XU",
+            'replacement' => "<div class=\"quote\">$2</div>"
         )
     );
 
