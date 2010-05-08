@@ -329,7 +329,7 @@ DELIMITER $$
 /**
  * Function for registrate user at forum.
  * Example:
- * CALL REGISTRATE_USER('login1', 'password1', 'email', user_role)
+ * SELECT REGISTRATE_USER('login2', 'password2', 'email2', 2)
  * For check login and password used settings from table 'config'
  * (ex. min password size, max login size, password complexity)
  *
