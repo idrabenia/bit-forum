@@ -85,3 +85,15 @@ a {
 	text-decoration: none;
 }
 
+.quote {
+	background-color: #ECECEC;
+	background-position: center center;
+	width: auto;
+	top: auto;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: #336666;
+	border: thin solid #999999;
+}
