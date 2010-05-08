@@ -9,6 +9,7 @@
     <script language="JavaScript" type="text/javascript" 
             src="{ROOT_PATH}templates/Admin/form_check.js">
     </script>
+	<script language="JavaScript" type="text/javascript" src="{ROOT_PATH}templates/Topics/message_editor.js"></script>
 </head>
 
 <body bgcolor="#FFFFFF">

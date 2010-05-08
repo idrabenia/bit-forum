@@ -12,6 +12,7 @@
 	{
 		 $tpl = str_replace('{FORUM_ID}', $row["frm_id"], $tpl);
 		 $tpl = str_replace('{FORUM_TITLE}', $row["frm_title"], $tpl);
+		 $tpl = str_replace('{FORUM_DESCRIPTION}',$row["frm_description"], $tpl);
 		 
 		 //Get moderator's  login using id
 		 $uid = $row["frm_moderator"];
