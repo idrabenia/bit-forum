@@ -3,7 +3,8 @@
 	header('Content-type: text/html; charset=utf-8');
 	
 	require_once('common.php');
-	require_once ("bread_crumps.php");	
+	require_once ('bread_crumps.php');	
+	require_once ('includes/message_parser.php');
 	
 	$current_user=2;
 	
@@ -13,7 +14,8 @@
 		 $tpl = str_replace('{FORUM_ID}',$forum_id, $tpl);	
 		 $tpl = str_replace('{TOPIC_ID}',$topic_id, $tpl);	
 		 $tpl = str_replace('{MESSAGE_ID}',$row["pst_id"], $tpl);
-		 $tpl = str_replace('{MESSAGE_TEXT}',$row["pst_text"], $tpl);
+		 $html_msg = user_message_to_html( $row["pst_text"] );
+		 $tpl = str_replace('{MESSAGE_TEXT}', $html_msg, $tpl);
 		 $tpl = str_replace('{NUMBER_OF_MESSAGE}',"#".$mes_num,$tpl);
 		 
 		 //Get the creator's login using id
@@ -100,6 +102,8 @@
 	
 	$form_tpl = str_replace('{FORUM_ID}', $forum_id, $form_tpl);
 	$form_tpl = str_replace('{TOPIC_ID}', $topic_id, $form_tpl);
+	$form_tpl = str_replace('{ROOTPATH}',ROOT_PATH, $form_tpl);
+	$form_tpl = str_replace('{TITLE}',"Новое соощение", $form_tpl);
 	
 	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
 	$main_tpl = str_replace('{BODY}', $crumps_tpl.$tab_tpl.$crumps_tpl.$form_tpl, $main_tpl);

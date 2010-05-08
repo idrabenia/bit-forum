@@ -71,7 +71,8 @@
 
 	//Get all topics for this forum
 	$r = mysql_query("SELECT* from `topics` 
-					  WHERE tpc_forum='$forum_id'",$db_link);
+					  WHERE tpc_forum='$forum_id' 
+					  ORDER BY tpc_id DESC",$db_link);
 	$template='';
 	while ($row = mysql_fetch_assoc($r))
 		$template = $template.get_form($top_tpl, $row, $db_link);
@@ -88,6 +89,8 @@
 
 	$form_tpl = str_replace('{FORUM_ID}', $forum_id, $form_tpl);
 	$form_tpl = str_replace('{TOPIC_ID}',0, $form_tpl);
+	$form_tpl = str_replace('{ROOTPATH}',ROOT_PATH, $form_tpl);
+	$form_tpl = str_replace('{TITLE}',"Новая тема", $form_tpl);
 
 	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
 	$main_tpl = str_replace('{BODY}', $crumps_tpl.$tab_tpl.$crumps_tpl.$form_tpl, $main_tpl);

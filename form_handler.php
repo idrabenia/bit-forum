@@ -2,7 +2,7 @@
 
 header('Content-type: text/html; charset=utf8');
 require_once ("common.php");
-error_reporting(1);	
+
 $lnk = $db_link;
 $current_user=2;
 
@@ -16,10 +16,10 @@ if (isset ($_GET["topic"]))
 if ($topic_id ==0)
 {
 	$ttl='';
-	if ((isset($_POST["title"]))&&($_POST["title"]!==''))
+	if ((isset($_POST["textfield"]))&&($_POST["textfield"]!==''))
 	{
 		
-			$ttl=$_POST["title"];
+			$ttl=$_POST["textfield"];
 			
 			mysql_query("INSERT INTO  `bit_forum`.`topics` (
 									  `tpc_id` ,
@@ -33,7 +33,7 @@ if ($topic_id ==0)
 }
 
 $msg='';
-if ((isset($_POST["textarea"]))&&($_POST["textarea"]!==''))
+if ((isset($_POST["message_area"]))&&($_POST["message_area"]!==''))
 {
 	if ($topic_id==0)
 	{
@@ -41,7 +41,7 @@ if ((isset($_POST["textarea"]))&&($_POST["textarea"]!==''))
 		$res= mysql_fetch_assoc($r);
 		$topic_id=$res["MAX( tpc_id )"];
 	}
-	$msg=$_POST["textarea"];
+	$msg=$_POST["message_area"];
 	$t=time();
 	mysql_query("INSERT INTO  `bit_forum`.`post` (
 							  `pst_id` ,

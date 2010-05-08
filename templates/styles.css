@@ -56,6 +56,7 @@
 .table_header{
 	background: #3F65B4;
 	color: #FFFFFF;
+	font-weight: bold;
 	border: 1px solid #FFFFFF;
 }
 .message_header{
@@ -73,6 +74,9 @@
 	background: #FFFFFF;
 	font-weight: bold;
 	border: medium solid #3F65B4;
+}
+.forum_description{
+	font-size:12px;
 }
 a {
 	font-family: "Times New Roman", Times, serif;
