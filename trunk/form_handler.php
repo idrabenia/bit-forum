@@ -4,7 +4,7 @@ header('Content-type: text/html; charset=utf8');
 require_once ("common.php");
 
 $lnk = $db_link;
-$current_user=2;
+$current_user=7;
 
 
 $topic_id=0;
