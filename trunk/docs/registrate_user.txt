@@ -1,0 +1,10 @@
+Пример регистрации пользователя.
+
+$result = mysql_query("SELECT REGISTRATE_USER('login3', 'password3', 'email2', 2)", 
+    $db_link);
+    
+echo mysql_error($db_link);
+    
+$row = mysql_fetch_row($result);
+$message = $row[0];
+echo $message;
