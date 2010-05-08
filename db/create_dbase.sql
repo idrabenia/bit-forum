@@ -323,36 +323,173 @@ ALTER TABLE `topics`
 ALTER TABLE `warning`
   ADD CONSTRAINT `warning_ibfk_1` FOREIGN KEY (`war_uid`) REFERENCES `users` (`usr_id`) ON DELETE CASCADE ON UPDATE CASCADE;
   
-  
-  
-/**
- * Procedure for register users at forum.
- * Example of usage:
- * CALL REGISTRATE_USER('test2', 'test2', 'test2@tut.by', 2)
- */
-
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS `bit_forum`.`REGISTRATE_USER` $$
 
-/* Function for registrate user on forum */
-CREATE PROCEDURE `bit_forum`.`REGISTRATE_USER` (
-  IN login VARCHAR(150), IN passw VARCHAR(100),
-  IN email TEXT, IN role INT)
+/**
+ * Function for registrate user at forum.
+ * Example:
+ * CALL REGISTRATE_USER('login1', 'password1', 'email', user_role)
+ * For check login and password used settings from table 'config'
+ * (ex. min password size, max login size, password complexity)
+ *
+ * If user successfully registered function return 'OK'
+ * otherwise return error message.
+ *
+ * @author Ilya G. Drobenya
+ */
+DROP FUNCTION IF EXISTS `REGISTRATE_USER` $$
+CREATE FUNCTION `REGISTRATE_USER`(
+  login VARCHAR(150), passw VARCHAR(100),
+  email TEXT, role INT) RETURNS VARCHAR(150)
   COMMENT 'Function for registrate user on forum'
 BEGIN
-  /* Generate password hash and security salt */
   DECLARE new_salt VARCHAR(100);
   DECLARE passw_hash VARCHAR(100);
+  DECLARE check_message VARCHAR(150);
 
+  -- 1062 -- is error code for value duplication error
+  DECLARE EXIT HANDLER FOR 1062
+    RETURN 'Identical login exists in database';
+
+  /* Generate password hash and security salt */
   SET new_salt = SHA1( RAND() );
   SET passw_hash = SHA1( CONCAT(SHA1(passw), new_salt) );
 
   /* Insert new user data into database */
-  INSERT INTO `users` (`usr_login`, `usr_registr_date`, `usr_password_hash`,
-    `usr_email`, `usr_role`, `usr_security_salt`)
-  VALUES
-    (login, UNIX_TIMESTAMP(), passw_hash, email, role, new_salt);
+  SET check_message = CHECK_ARGUMENTS(login, passw);
+  IF check_message <> 'OK' THEN
+    RETURN check_message;
+  ELSEIF role <> 2 THEN
+    RETURN 'User role must be set to registered user (2)';
+  ELSE
+    INSERT INTO `users` (`usr_login`, `usr_registr_date`, `usr_password_hash`,
+      `usr_email`, `usr_role`, `usr_security_salt`)
+    VALUES
+      (login, UNIX_TIMESTAMP(), passw_hash, email, role, new_salt);
+
+    RETURN 'OK';
+  END IF;
+
+END $$
+
+
+/**
+ * Function for validate login and password.
+ *
+ * If login and password correct function return 'OK'
+ * otherwise returns error message.
+ *
+ * @author Ilya G. Drobenya
+ */
+DROP FUNCTION IF EXISTS `CHECK_ARGUMENTS` $$
+CREATE FUNCTION `CHECK_ARGUMENTS`(login VARCHAR(100),
+  passw VARCHAR(150)) RETURNS VARCHAR(150)
+BEGIN
+  DECLARE MIN_LOGIN_SIZE INT;
+  DECLARE MAX_LOGIN_SIZE INT;
+
+  DECLARE MIN_PASSW_SIZE INT;
+  DECLARE MAX_PASSW_SIZE INT;
+
+  DECLARE complex_check_msg VARCHAR(100);
+
+  /* Select constants for check arguments */
+  SELECT `param_value` INTO MIN_PASSW_SIZE FROM `config`
+    WHERE `param_name` = 'MIN_PASSWORD_SIZE';
+
+  SELECT `param_value` INTO MAX_PASSW_SIZE FROM `config`
+    WHERE `param_name` = 'MAX_PASSWORD_SIZE';
+
+  SELECT `param_value` INTO MIN_LOGIN_SIZE FROM `config`
+    WHERE `param_name` = 'MIN_LOGIN_SIZE';
+
+  SELECT `param_value` INTO MAX_LOGIN_SIZE FROM `config`
+    WHERE `param_name` = 'MAX_LOGIN_SIZE';
+
+  /* Validate password and login */
+  SET complex_check_msg = CHECK_PASSWORD_COMPLEXITY(passw);
+
+  IF complex_check_msg <> 'OK' THEN
+    RETURN complex_check_msg;
+
+  ELSEIF LENGTH(passw) < MIN_PASSW_SIZE THEN
+    RETURN CONCAT('Password length must be greate than ', MIN_PASSW_SIZE);
+
+  ELSEIF LENGTH(passw) > MAX_PASSW_SIZE THEN
+    RETURN CONCAT('Password length must be less than ', MAX_PASSW_SIZE);
+
+  ELSEIF LENGTH(login) < MIN_LOGIN_SIZE THEN
+    RETURN CONCAT('Login length must be greate than ', MIN_LOGIN_SIZE);
+
+  ELSEIF LENGTH(login) > MAX_LOGIN_SIZE THEN
+    RETURN CONCAT('Login length must be less than ', MAX_LOGIN_SIZE);
+
+  ELSE
+    RETURN 'OK';
+
+  END IF;
+
+END $$
+
+
+/**
+ * Function for check password complexity.
+ * Password complexity settings holdes in table
+ * 'config'. It may have next values:
+ *      NO_PASSW_COMPLEX -- no limitation on password complexity
+ *      DIGIT_PASSW_COMPLEX -- password must contain digits
+ *      REGISTER_PASSW_COMPLEX -- must contain upper case latin chars
+ *      DIGIT_REGISTER_PASSW_COMPLEX -- must contain digits and upper
+ *                                      case latin chars
+ *
+ * If password valid function return 'OK'
+ * otherwise returns error message.
+ *
+ * @author Ilya G. Drobenya
+ */
+DROP FUNCTION IF EXISTS `CHECK_PASSWORD_COMPLEXITY` $$
+CREATE FUNCTION `CHECK_PASSWORD_COMPLEXITY`(
+  passw VARCHAR(150)) RETURNS VARCHAR(150)
+BEGIN
+  DECLARE COMPLEXITY VARCHAR(50);
+  DECLARE check_message VARCHAR(100);
+
+  /* Fetch complexity settings from database */
+  SELECT `param_value` INTO COMPLEXITY FROM `config`
+    WHERE `param_name` = 'PASSW_COMPLEXITY';
+
+  /* Check execution of complexity for current password */
+  CASE COMPLEXITY
+    WHEN 'NO_PASSW_COMPLEX' THEN RETURN 'OK';
+
+    WHEN 'DIGIT_PASSW_COMPLEX' THEN
+      IF passw REGEXP BINARY '[0-9]' = 1 THEN
+        RETURN 'OK';
+      ELSE
+        RETURN 'Password must have digits';
+      END IF;
+
+    WHEN 'REGISTER_PASSW_COMPLEX' THEN
+      IF passw REGEXP BINARY '[A-Z]' = 1 THEN
+        RETURN 'OK';
+      ELSE
+        RETURN 'Password must contain latin characters in upper case';
+      END IF;
+
+    WHEN 'DIGIT_REGISTER_PASSW_COMPLEX' THEN
+      IF (passw REGEXP BINARY '[A-Z]' = 1)
+          AND (passw REGEXP BINARY '[0-9]' = 1) THEN
+        RETURN 'OK';
+      ELSE
+        RETURN 'Password must contain latin characters in upper case '
+               'and digits';
+      END IF;
+
+    ELSE
+      RETURN 'Error in database';
+  END CASE;
+
 END $$
 
 DELIMITER ;
