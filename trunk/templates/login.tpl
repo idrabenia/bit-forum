@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <td align="center" class="parameter_name" colspan="2">
-                            <span class="parameter_hint"> Введите текст с картинки </span>
+                            <span class="parameter_hint"> Введите цифры с картинки </span>
                             <a href="">
                                 <img src="captcha.php" border="0" />
                             </a>

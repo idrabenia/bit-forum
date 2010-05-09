@@ -5,7 +5,7 @@
 		<td align = "center" colspan = "3"><b>{TITLE}</b></td>
 	  </tr>
 	  <tr class="message_header">
-		<td align = "center"><b>Subject</b></td>
+		<td align = "center"><b>Тема</b></td>
 		<td>
 			<input type="text" size="105" name="textfield" />
 		</td>
@@ -98,9 +98,9 @@
 			   title="Wink" alt="Wink"
 			   onclick="javascipt: editor.addSmileToMessage( ';)' );" />
 		</td>
-		<td rowspan="1">
+		<td align = "center" rowspan="1">
 		  <p>
-			<textarea name="message_area" cols="80" rows="10" id="message_area" 
+			<textarea name="message_area" cols="91" rows="10" id="message_area" 
 					onselect="javascript: editor.storeCaret();"
 					onclick="javascript: editor.storeCaret();"
 					onkeyup="javascript: editor.storeCaret();" ></textarea>		
@@ -114,7 +114,7 @@
 	  
 	   <tr class = "table_header">
 		<td>&nbsp;</td>
-		<td>
+		<td align = "center">
 		  <input type="submit" value="Отправить" />
 		  <input type="reset" value="Очистить" />
 		</td>
