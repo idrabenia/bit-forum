@@ -15,7 +15,7 @@ define('DB_PATH', 'localhost:3306');
 define('DB_NAME', 'bit_forum');
 
 /** Path after host to application folder */
-define('ROOT_PATH', '/');
+define('ROOT_PATH', '/bit-forum/');//'/');
 
 /** Application configuration */
 define('DEBUG', TRUE);

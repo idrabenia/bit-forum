@@ -15,6 +15,9 @@
 <body bgcolor="#FFFFFF" link = "#000000" alink = "#FFAA00">
     <table width="100%" align="center">
         <tr>
+			<td><a name = "top"></a></td>
+		</tr>
+		<tr>
             <td align="center">
                 <img src="{ROOT_PATH}images/logo.gif" width="990" />
             </td>
