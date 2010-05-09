@@ -97,7 +97,8 @@
 	if (isset ($_POST["inst_id"]))
 	{
 		DeletePost($_POST["inst_id"], $current_user, $auth, $db_link);
-		header("Location: http://127.0.0.1/bit-forum/view_posts.php?forum=".$forum_id."&topic=".$topic_id);
+		header("Location: ".$ROOT_PATH."view_posts.php?forum=".$forum_id
+			."&topic=".$topic_id);
 	}
 	
 	

@@ -81,7 +81,7 @@
 	if (isset ($_POST["inst_id"]))
 	{
 		DeleteTopic($_POST["inst_id"], $auth, $db_link);
-		header("Location: http://127.0.0.1/bit-forum/view_topics.php?forum=".$forum_id);
+		header("Location: ".$ROOT_PATH."view_topics.php?forum=".$forum_id);
 	}
 	
 	//Get all topics for this forum
