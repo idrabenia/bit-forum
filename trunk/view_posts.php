@@ -88,10 +88,10 @@
 	$auth = User::getInstance();
 	
 	if (isset ($_GET["forum"]))
-		$forum_id=$_GET['forum'];
+		$forum_id = $_GET['forum'];
 	
 	if (isset ($_GET["topic"]))
-		$topic_id=$_GET['topic'];
+		$topic_id = $_GET['topic'];
 	
 	//Get request for deleting topic
 	if (isset ($_POST["inst_id"]))
@@ -116,13 +116,15 @@
 	
 	if ($auth->isGuest())
 	{
-		$log_tpl =  str_replace('{CURR_STATE1}',"<a href = 'login_page.php'>Войти </a>", $log_tpl);
+		$url = urlencode("view_posts.php?forum=".$forum_id."&topic=".$topic_id);
+		$log_tpl =  str_replace('{CURR_STATE1}',"<a href = 'login_page.php?url=".$url."'>Войти </a>", $log_tpl);
 		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = ''> Зарегистрироваться</a>", $log_tpl);
 	}
 	else
 	{
 		$log_tpl =  str_replace('{CURR_STATE1}',"Текущий пользователь -  ".$auth->getUserNickname(), $log_tpl);
-		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = 'login_page.php?act=logout&url=view_forums.php'>Выйти</a>", $log_tpl);
+		$url = urlencode("view_posts.php?forum=".$forum_id."&topic=".$topic_id);
+		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = 'login_page.php?act=logout&url=".$url."'>Выйти</a>", $log_tpl);
 
 	}
 	

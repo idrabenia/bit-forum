@@ -99,13 +99,15 @@
 
 	if ($auth->isGuest())
 	{
-		$log_tpl =  str_replace('{CURR_STATE1}',"<a href = 'login_page.php'>Войти </a>", $log_tpl);
+		$url = urlencode("view_topics.php?forum=".$forum_id);
+		$log_tpl =  str_replace('{CURR_STATE1}',"<a href = 'login_page.php?url=".$url."'>Войти </a>", $log_tpl);
 		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = ''> Зарегистрироваться</a>", $log_tpl);
 	}
 	else
 	{
+		$url = urlencode("view_topics.php?forum=".$forum_id);
 		$log_tpl =  str_replace('{CURR_STATE1}',"Текущий пользователь -  ".$auth->getUserNickname(), $log_tpl);
-		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = 'login_page.php?act=logout&url=view_forums.php'>Выйти</a>", $log_tpl);
+		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = 'login_page.php?act=logout&url=".$url."'>Выйти</a>", $log_tpl);
 
 	}
 	
