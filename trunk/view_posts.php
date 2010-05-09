@@ -29,6 +29,14 @@
 		 
 		 $tpl = str_replace('{POSTER}',$res["usr_login"],$tpl);
 		 
+		 //Get number of users messages
+		 $r = mysql_query("SELECT COUNT( pst_id ) 
+						   FROM  `bit_forum`.`post` 
+						   WHERE  `pst_sender` ='$uid'", $db_link);
+		 $res =  mysql_fetch_assoc($r);
+		 
+		 $tpl = str_replace('{MESS_COUNT}',$res["COUNT( pst_id )"],$tpl);
+		 
 		 //Get topic title
 		 $r = mysql_query("SELECT tpc_title 
 						   FROM  `bit_forum`.`topics` 

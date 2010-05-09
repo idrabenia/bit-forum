@@ -7,7 +7,11 @@
   </tr>
   <tr>
     <td>
-		<table width="100%" cellspacing="1"><tr class="message_header"><td>&nbsp;</td> </tr></table></td>
+		<table width="100%" cellspacing="1">
+			<tr class="message_header">
+				<td align = "center"><a href="#top">Вверх</a></td>
+			</tr>
+		</table></td>
   </tr>
   <tr>
     <td><table width="100%" cellspacing="1"><tr class="table_header"><td>&nbsp;</td></tr></table></td>
