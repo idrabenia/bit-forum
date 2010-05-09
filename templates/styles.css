@@ -78,10 +78,17 @@
 .forum_description{
 	font-size:12px;
 }
-a {
+a{
 	font-family: "Times New Roman", Times, serif;
 	font-size: 14px;
 	color: #3F65B4;
+	text-decoration: none;
+}
+
+A:hover{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	color: #0099FF;
 	text-decoration: none;
 }
 

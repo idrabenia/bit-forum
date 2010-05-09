@@ -12,7 +12,7 @@
 	<script language="JavaScript" type="text/javascript" src="{ROOT_PATH}templates/Topics/message_editor.js"></script>
 </head>
 
-<body bgcolor="#FFFFFF">
+<body bgcolor="#FFFFFF" link = "#000000" alink = "#FFAA00">
     <table width="100%" align="center">
         <tr>
             <td align="center">

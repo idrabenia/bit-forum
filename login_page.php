@@ -125,7 +125,7 @@ function get_redirect_url() {
     @session_start();
     
     if ( isset($_SESSION['redirect_url']) ) {
-        return $_SESSION['redirect_url'];       
+        return urldecode($_SESSION['redirect_url']);       
     }
     
     return MAIN_PAGE;
