@@ -5,14 +5,14 @@
 	require_once('common.php');
 	require_once ('bread_crumps.php');	
 	require_once ('includes/message_parser.php');
+	require_once ("includes/authorization.php");
 	
-	$current_user=7;
 	
 	//Fill the template for each post
-	function get_form($tpl, $row, $forum_id, $topic_id, $mes_num, $current_user, $show_del, $db_link)
+	function get_form($tpl, $row, $forum_id, $topic_id, $mes_num, $auth, $db_link)
 	{
-		 $tpl = str_replace('{FORUM_ID}',$forum_id, $tpl);	
-		 $tpl = str_replace('{TOPIC_ID}',$topic_id, $tpl);	
+		 // $tpl = str_replace('{FORUM_ID}',$forum_id, $tpl);	
+		 // $tpl = str_replace('{TOPIC_ID}',$topic_id, $tpl);	
 		 
 		 $html_msg = user_message_to_html( $row["pst_text"] );//translate message with bbcode to html
 		 
@@ -42,7 +42,7 @@
 		 $tpl = str_replace('{MESSAGE_DATE}',$d,$tpl);
 		 
 		 //if need show delete button
-		 if (($show_del)||($row["pst_sender"]==$current_user))
+		 if (($auth->isAdmin())||($row["pst_sender"]==$auth->getUserId()))
 		 {
 			 $del_tpl = file_get_contents('./templates/Topics/delete_form.tpl');
 			
@@ -57,7 +57,7 @@
 		return $tpl;
 	} 
 	
-	function DeletePost($pstid, $current_user, $show_del, $db_link)
+	function DeletePost($pstid, $current_user, $auth, $db_link)
 	{
 		//Get id of message creator using message id
 		$req = mysql_query("SELECT pst_sender 
@@ -67,7 +67,7 @@
 		$result = mysql_fetch_assoc($req);
 		
 		$r = false;
-		if (($result["pst_sender"] == $current_user)||($show_del))
+		if (($auth->isAdmin())||($result["pst_sender"] == $auth->getUserId()))
 		{
 			$r = mysql_query("DELETE FROM `post` 
 						      WHERE `pst_id` = '$pstid' 
@@ -78,12 +78,14 @@
 	
 	//----------------------------------GET TEMPLATES-----------------------------------//
 	$main_tpl = file_get_contents('./templates/main.tpl');//Common template for all pages 
+	$log_tpl = file_get_contents('./templates/Topics/log_in_out.tpl');//Line with information about user
 	$tab_tpl = file_get_contents('./templates/Topics/table.tpl');//External table of the list of posts
 	$tabhead_tpl = file_get_contents('./templates/Topics/posts_table_header.tpl');//header of the table
 	$crumps_tpl = file_get_contents('./templates/Topics/bread_crumps.tpl');//Bread crumps template
 	$mes_tpl = file_get_contents('./templates/Topics/message_table.tpl');//template for one message
 	$form_tpl = file_get_contents('./templates/Topics/form.tpl');//form for message
 	
+	$auth = User::getInstance();
 	
 	if (isset ($_GET["forum"]))
 		$forum_id=$_GET['forum'];
@@ -91,20 +93,10 @@
 	if (isset ($_GET["topic"]))
 		$topic_id=$_GET['topic'];
 	
-	//Find out if we should show delete button
-	 $show_del = false;
-	 $r = mysql_query("SELECT usr_role 
-					   FROM `users` 
-					   WHERE usr_id='$current_user'", $db_link);
-	 $row = mysql_fetch_assoc($r);
-	 
-	 if ($row["usr_role"]==3)
-		 $show_del=true;
-	
 	//Get request for deleting topic
 	if (isset ($_POST["inst_id"]))
 	{
-		DeletePost($_POST["inst_id"], $current_user, $show_del, $db_link);
+		DeletePost($_POST["inst_id"], $current_user, $auth, $db_link);
 		header("Location: http://127.0.0.1/bit-forum/view_posts.php?forum=".$forum_id."&topic=".$topic_id);
 	}
 	
@@ -117,10 +109,22 @@
 	$mes_num=1;
 	while ($row = mysql_fetch_assoc($r))
 	{
-		$template = $template.get_form($mes_tpl, $row, $forum_id, $topic_id, $mes_num, $current_user, $show_del, $db_link);
+		$template = $template.get_form($mes_tpl, $row, $forum_id, $topic_id, $mes_num, $auth, $db_link);
 		$mes_num++;
 	}
 	$mes_tpl = $template;
+	
+	if ($auth->isGuest())
+	{
+		$log_tpl =  str_replace('{CURR_STATE1}',"<a href = 'login_page.php'>Войти </a>", $log_tpl);
+		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = ''> Зарегистрироваться</a>", $log_tpl);
+	}
+	else
+	{
+		$log_tpl =  str_replace('{CURR_STATE1}',"Текущий пользователь -  ".$auth->getUserNickname(), $log_tpl);
+		$log_tpl =  str_replace('{CURR_STATE2}',"<a href = 'login_page.php?act=logout&url=view_forums.php'>Выйти</a>", $log_tpl);
+
+	}
 	
 	$crumps_tpl = str_replace('{CRUMPS}',GetCrumps($db_link), $crumps_tpl);
 	
@@ -138,7 +142,7 @@
 	
 	$main_tpl = str_replace('{TITLE}', "БИТ-форум - ".$row["tpc_title"], $main_tpl);
 	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
-	$main_tpl = str_replace('{BODY}', $crumps_tpl.$tab_tpl.$crumps_tpl.$form_tpl, $main_tpl);
+	$main_tpl = str_replace('{BODY}', $log_tpl.$crumps_tpl.$tab_tpl.$crumps_tpl.$form_tpl, $main_tpl);
 	
 	echo $main_tpl;
 ?>
