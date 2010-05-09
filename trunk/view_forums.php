@@ -51,7 +51,7 @@
 		mysql_query("DELETE FROM `forums` 
 					 WHERE `frm_id` = '$forum_id' 
 				     LIMIT 1;",$db_link);
-		header("Location: http://127.0.0.1/bit-forum/view_forums.php");
+		header("Location: ".$ROOT_PATH."view_forums.php");
 	}
 	
 	$r = mysql_query("SELECT * from `forums`", $db_link);

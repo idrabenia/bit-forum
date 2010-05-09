@@ -85,5 +85,7 @@ else
 	die();
 }
 
-header("Location: http://127.0.0.1/bit-forum/view_posts.php?forum=".$forum_id."&topic=".$topic_id);
+// Modified by Ilya
+//header("Location: http://127.0.0.1/bit-forum/view_posts.php?forum=".$forum_id."&topic=".$topic_id);
+header("Location: ".$ROOT_PATH."view_posts.php?forum=".$forum_id."&topic=".$topic_id);
 ?>
