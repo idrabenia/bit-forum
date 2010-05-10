@@ -4,14 +4,14 @@ header('Content-type: text/html; charset=utf8');
 require_once ("common.php");
 require_once ("includes/authorization.php");
 
-$lnk = $db_link;
-
 $topic_id=0;
-
+$message_id=0;
 if (isset ($_GET["forum"]))
 	$forum_id=$_GET["forum"];
 if (isset ($_GET["topic"]))
 	$topic_id=$_GET["topic"];
+if (isset ($_GET["message"]))
+   $message_id=$_GET["message"];
 
 $auth = User::getInstance();	
 
@@ -42,7 +42,7 @@ if ($topic_id ==0)
 									  `tpc_forum` ,
 									  `tpc_title`)
 									   VALUES (
-									   NULL ,  '$current_user',  '$forum_id',  '$ttl')",$lnk);
+									   NULL ,  '$current_user',  '$forum_id',  '$ttl')",$db_link);
 									   
 	}
 	else
@@ -62,17 +62,28 @@ if ((isset($_POST["message_area"]))&&($_POST["message_area"]!==''))
 		$res= mysql_fetch_assoc($r);
 		$topic_id=$res["MAX( tpc_id )"];
 	}
-	$msg=$_POST["message_area"];
-	$t=time();
-	mysql_query("INSERT INTO  `bit_forum`.`post` (
-							  `pst_id` ,
-							  `pst_sender` ,
-							  `pst_topic` ,
-							  `pst_time` ,
-							  `pst_text`)
-							   VALUES (
-							   NULL ,  '$current_user',  '$topic_id',  '$t',  '$msg')",$lnk);
-	
+	if ($message_id==0)
+	{
+		$msg=$_POST["message_area"];
+		$t=time();
+		mysql_query("INSERT INTO  `bit_forum`.`post` (
+								  `pst_id` ,
+								  `pst_sender` ,
+								  `pst_topic` ,
+								  `pst_time` ,
+								  `pst_text`)
+								   VALUES (
+								   NULL ,  '$current_user',  '$topic_id',  '$t',  '$msg')",$db_link);
+	}
+	else
+	{
+		$msg=$_POST["message_area"];
+		echo $message_id."<br/>";
+		echo $msg;
+		mysql_query("UPDATE post 
+					 SET pst_text='$msg'
+					 WHERE pst_id='$message_id'", $db_link);
+	}
 }
 else
 {
@@ -85,7 +96,5 @@ else
 	die();
 }
 
-// Modified by Ilya
-//header("Location: http://127.0.0.1/bit-forum/view_posts.php?forum=".$forum_id."&topic=".$topic_id);
 header("Location: ".$ROOT_PATH."view_posts.php?forum=".$forum_id."&topic=".$topic_id);
 ?>

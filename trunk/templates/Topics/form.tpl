@@ -1,17 +1,18 @@
-﻿<!-- <script language="javascript" type="text/javascript">var editor = new MessageEditor();</script> -->
+﻿
+<!-- <script language="javascript" type="text/javascript">var editor = new MessageEditor();</script> -->
  <form action="form_handler.php?forum={FORUM_ID}&topic={TOPIC_ID}" method="post">
 	<table width="95%" align="center">
 	  <tr class = "table_header">
+		<script language="javascript" type="text/javascript">var editor = new MessageEditor();</script>
 		<td align = "center" colspan = "3"><b>{TITLE}</b></td>
 	  </tr>
 	  <tr class="message_header">
 		<td align = "center"><b>Тема</b></td>
-		<td>
-			<input type="text" size="105" name="textfield" />
+		<td align = "center">
+			<input type="text" size="105" name="textfield" value = "{TITLE_VAL}"/>
 		</td>
 		<td>&nbsp;</td>
-	  </tr>
-	  
+	  </tr>  
 	  <tr class = "message_text">
 		<td width="25%">&nbsp;</td>
 		<td width="1%" > 
@@ -100,10 +101,10 @@
 		</td>
 		<td align = "center" rowspan="1">
 		  <p>
-			<textarea name="message_area" cols="91" rows="10" id="message_area" 
+			<textarea name="message_area" cols="91" rows="10" id="message_area"  
 					onselect="javascript: editor.storeCaret();"
-					onclick="javascript: editor.storeCaret();"
-					onkeyup="javascript: editor.storeCaret();" ></textarea>		
+					onclick="javascript: editor.storeCaret();"	
+					onkeyup="javascript: editor.storeCaret();" >{TEXT_VAL}</textarea>		
 			<script language="javascript" type="text/javascript">
 			  editor.setTextArea("message_area");
 			</script>  
@@ -121,4 +122,4 @@
 		<td>&nbsp;</td>
 	  </tr>
 	</table>
- </form>  
+   </form>  
