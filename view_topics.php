@@ -32,6 +32,7 @@
 			$del_tpl = file_get_contents('./templates/Topics/delete_form.tpl');
 			
 			$del_tpl = str_replace('{ACTION1}', "view_topics.php?forum=".$forum_id, $del_tpl);
+			$del_tpl = str_replace('{ACTION2}', "change_topic_title.php?forum=".$forum_id."&topic=".$row["tpc_id"], $del_tpl);
 			$del_tpl = str_replace('{INST_ID}', $row["tpc_id"], $del_tpl);
 			
 			$tpl = str_replace('{DELETE_FORM}', $del_tpl, $tpl);

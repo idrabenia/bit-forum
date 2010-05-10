@@ -66,7 +66,7 @@
 		return $tpl;
 	} 
 	
-	function DeletePost($pstid, $current_user, $auth, $db_link)
+	function DeletePost($pstid, $auth, $db_link)
 	{
 		//Get id of message creator using message id
 		$req = mysql_query("SELECT pst_sender 
@@ -105,7 +105,7 @@
 	//Get request for deleting topic
 	if (isset ($_POST["inst_id"]))
 	{
-		DeletePost($_POST["inst_id"], $current_user, $auth, $db_link);
+		DeletePost($_POST["inst_id"], $auth, $db_link);
 		header("Location: ".$ROOT_PATH."view_posts.php?forum=".$forum_id
 			."&topic=".$topic_id);
 	}
