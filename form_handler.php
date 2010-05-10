@@ -95,6 +95,11 @@ else
 		 <a href='".$url."'>Вернуться назад</a>";
 	die();
 }
-
-header("Location: ".$ROOT_PATH."view_posts.php?forum=".$forum_id."&topic=".$topic_id);
+if ($message_id==0)
+{
+	$r=mysql_query("SELECT MAX( pst_id ) FROM `post` ");
+	$res= mysql_fetch_assoc($r);
+	$message_id=$res["MAX( pst_id )"];
+}
+header("Location: ".$ROOT_PATH."view_posts.php?forum=".$forum_id."&topic=".$topic_id."#".$message_id);
 ?>
