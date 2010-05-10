@@ -81,6 +81,11 @@ function replace_bbcodes($message) {
         array(
             'pattern' => "/(\[quote\])(.*)(\[\/quote\])/XU",
             'replacement' => "<div class=\"quote\">$2</div>"
+        ),
+        array(
+            'pattern' => "/\[quote=(.*)\](.*)\[\/quote\]/XU",
+            'replacement' => "<b>$1 писал(а): </b>"
+                ."<div class=\"quote\">$2</div>"
         )
     );
 

@@ -1,4 +1,4 @@
-﻿<script language="javascript" type="text/javascript">var editor = new MessageEditor();</script>
+﻿<!-- <script language="javascript" type="text/javascript">var editor = new MessageEditor();</script> -->
  <form action="form_handler.php?forum={FORUM_ID}&topic={TOPIC_ID}" method="post">
 	<table width="95%" align="center">
 	  <tr class = "table_header">

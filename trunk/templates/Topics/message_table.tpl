@@ -18,11 +18,19 @@
 				</tr>
 			</table>
 		</td>
-		<td colspan="2" valign="top">{MESSAGE_TEXT}</td>
+		<td colspan="2" valign="top" id="BTN_{NUMBER_OF_MESSAGE}" 
+				name="BTN_{NUMBER_OF_MESSAGE}" >
+			{MESSAGE_TEXT}
+		</td>
 	</tr>
 	<tr class="message_text">
 		<td>&nbsp;</td>
-		<td><a href="#top">Вверх</a></td>
+		<td>
+			<a href="#top">Вверх</a>
+			<a href="javascript: editor.insertQuote('BTN_{NUMBER_OF_MESSAGE}', '{POSTER}');" > 
+				<img src="{ROOT_PATH}images/for_pages/post_quote.gif" alt="Цитата" border="0" /> 
+			</a>
+		</td>
 		{DELETE_FORM}
 	</tr>
 	</form>
