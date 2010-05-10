@@ -26,7 +26,8 @@
 	<tr class="message_text">
 		<td>&nbsp;</td>
 		<td>
-			<a href="javascript: editor.insertQuote('BTN_{NUMBER_OF_MESSAGE}', '{POSTER}');" > 
+			<a onclick="javascript: editor.insertQuote('BTN_{NUMBER_OF_MESSAGE}', '{POSTER}');" 
+				href="#message_editor" > 
 				<img src="{ROOT_PATH}images/for_pages/post_quote.gif" alt="Цитата" border="0" /> 
 			</a>
 		</td>
