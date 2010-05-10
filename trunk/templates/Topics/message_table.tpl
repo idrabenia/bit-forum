@@ -1,6 +1,6 @@
 <table width="100%">
 	<tr class="message_header">
-		<td colspan="3" align="left" >{NUMBER_OF_MESSAGE}</td>
+		<td colspan="3" align="left" ><a name= "{MESS_ID}"></a>{NUMBER_OF_MESSAGE}</td>
 	</tr>
 	<tr class="message_text">
 		<td align="center"><b>{POSTER}</b></td>

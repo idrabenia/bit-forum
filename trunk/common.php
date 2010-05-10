@@ -8,7 +8,7 @@
 require_once('config.php');
 
 
-define('MAIN_PAGE', '/view_forums.php');
+define('MAIN_PAGE', '/bit-forum/view_forums.php');
 
 /**
  * Create connection to database.

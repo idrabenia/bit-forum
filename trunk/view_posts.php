@@ -12,7 +12,7 @@
 	function get_form($tpl, $row, $forum_id, $topic_id, $mes_num, $auth, $db_link)
 	{
 		 // $tpl = str_replace('{FORUM_ID}',$forum_id, $tpl);	
-		 // $tpl = str_replace('{TOPIC_ID}',$topic_id, $tpl);	
+		  $tpl = str_replace('{MESS_ID}',$row["pst_id"], $tpl);	
 		 
 		 $html_msg = user_message_to_html( $row["pst_text"] );//translate message with bbcode to html
 		 
