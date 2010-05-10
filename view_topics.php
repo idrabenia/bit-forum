@@ -31,7 +31,7 @@
 		{
 			$del_tpl = file_get_contents('./templates/Topics/delete_form.tpl');
 			
-			$del_tpl = str_replace('{ACTION}', "view_topics.php?forum=".$forum_id, $del_tpl);
+			$del_tpl = str_replace('{ACTION1}', "view_topics.php?forum=".$forum_id, $del_tpl);
 			$del_tpl = str_replace('{INST_ID}', $row["tpc_id"], $del_tpl);
 			
 			$tpl = str_replace('{DELETE_FORM}', $del_tpl, $tpl);
@@ -120,6 +120,9 @@
 	$form_tpl = str_replace('{TOPIC_ID}',0, $form_tpl);
 	$form_tpl = str_replace('{ROOTPATH}',ROOT_PATH, $form_tpl);
 	$form_tpl = str_replace('{TITLE}',"Новая тема", $form_tpl);
+	$form_tpl = str_replace('{TITLE_VAL}',"", $form_tpl);
+	$form_tpl = str_replace('{TEXT_VAL}',"", $form_tpl);
+	$form_tpl = str_replace('{MESS_ID}',0, $form_tpl);
 	
 	$r = mysql_query("SELECT frm_title from `forums` 
 					  WHERE frm_id='$forum_id'", $db_link);

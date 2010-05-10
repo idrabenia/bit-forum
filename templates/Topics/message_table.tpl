@@ -14,7 +14,7 @@
 					<td align = "center" colspan = "2"><img src="./images/Avatars/20321.jpg" alt="User avatar" width="94" height="94" /></td>
 				</tr>
 				<tr class = "forum_description">
-					<td align = "center">Messages:{MESS_COUNT}</td>
+					<td align = "center">Сообшений:{MESS_COUNT}</td>
 				</tr>
 			</table>
 		</td>
@@ -26,7 +26,6 @@
 	<tr class="message_text">
 		<td>&nbsp;</td>
 		<td>
-			<a href="#top">Вверх</a>
 			<a href="javascript: editor.insertQuote('BTN_{NUMBER_OF_MESSAGE}', '{POSTER}');" > 
 				<img src="{ROOT_PATH}images/for_pages/post_quote.gif" alt="Цитата" border="0" /> 
 			</a>
