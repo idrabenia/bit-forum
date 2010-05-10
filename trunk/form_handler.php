@@ -77,13 +77,19 @@ if ((isset($_POST["message_area"]))&&($_POST["message_area"]!==''))
 	}
 	else
 	{
-		$msg=$_POST["message_area"];
-		echo $message_id."<br/>";
-		echo $msg;
-		mysql_query("UPDATE post 
-					 SET pst_text='$msg'
-					 WHERE pst_id='$message_id'", $db_link);
-	}
+        $req = mysql_query("SELECT pst_sender 
+							FROM  `bit_forum`.`post` 
+							WHERE  `pst_id` ='$message_id'",$db_link);
+		$result = mysql_fetch_assoc($req);
+        
+        if (($auth->isAdmin())||($result["pst_sender"] == $auth->getUserId()))
+        {
+    		$msg=$_POST["message_area"];
+    		mysql_query("UPDATE post 
+    					 SET pst_text='$msg'
+    					 WHERE pst_id='$message_id'", $db_link);
+        }
+    }
 }
 else
 {
