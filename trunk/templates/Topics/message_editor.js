@@ -66,13 +66,17 @@ MessageEditor.prototype.insertText = function(startText, endText) {
     else if (this.textArea != null && this.textArea.selectionStart + 1 
             && this.textArea.selectionEnd + 1) {
         var textArea = this.textArea;
-        var selectedText = textArea.value.substring(
-        	textArea.selectionStart, textArea.selectionEnd);
-        textArea.value = textArea.value.substring(0, 
-        	textArea.selectionStart);
+				
+		var selectStart = textArea.selectionStart;
+		var selectEnd = textArea.selectionEnd;
+				
+        var oldText = textArea.value;
+        var selectedText = oldText.substring(selectStart, selectEnd);
+
+        textArea.value = oldText.substring(0, selectStart);
         textArea.value += startText + selectedText + endText; 
-        textArea.value += textArea.value.substring(
-        	textArea.selectionEnd, textArea.value.length);
+        textArea.value += oldText.substring(
+        	selectEnd, oldText.length);
     }
     else {
         this.textArea.value += startText + endText;
