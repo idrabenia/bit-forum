@@ -152,8 +152,8 @@
 	$row = mysql_fetch_assoc($r);
 	
 	$main_tpl = str_replace('{TITLE}', "БИТ-форум - ".$row["tpc_title"], $main_tpl);
-	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
 	$main_tpl = str_replace('{BODY}', $log_tpl.$crumps_tpl.$tab_tpl.$crumps_tpl.$form_tpl, $main_tpl);
+	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
 	
 	echo $main_tpl;
 ?>

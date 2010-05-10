@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=utf8" />
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>{TITLE}</title>
     <link href="{ROOT_PATH}templates/styles.css" rel="stylesheet" type="text/css" />
     <script language="JavaScript" type="text/javascript" 
