@@ -161,6 +161,9 @@
 		</td>
 	</tr>
 	<tr>
+		<td class="parameter_name" align = "center" colspan = "2"><img src="{IN_IMAGE}" alt="User avatar" width="94" height="94" /></td>
+	</tr>
+	<tr>
 		<td colspan="2" align="center" class="parameter_value">
 			<b>About</b>
 		</td>

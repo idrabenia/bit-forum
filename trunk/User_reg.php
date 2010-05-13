@@ -24,13 +24,15 @@
 		$tpl_email 		=$_POST["in_email"];
 		$tpl_first_name =$_POST["in_first_name"];
 		$tpl_last_name	=$_POST["in_last_name"];
-		$tpl_password	=sha1($_POST["in_password1"]);
-		$tpl_confirm  	=sha1($_POST["in_password2"]);
-		$tpl_security	=$_POST["in_email"];
+		$tpl_password	=$_POST["in_password1"];
+		$tpl_confirm  	=$_POST["in_password2"];
+		
 		$registr_date	=time();
+		$salt			=$registr_date*2;
 		
 		if ($tpl_password==$tpl_confirm)
 		{
+		 $pass_hash		=sha1(sha1($tpl_password).$salt);
 		 $sql = "INSERT INTO users (
 									`usr_id`,
 									`usr_login`,
@@ -40,22 +42,27 @@
 									`usr_role`,
 									`usr_security_salt`,
 									`usr_first_name`,
-									`usr_last_name`
+									`usr_last_name`,
+									`usr_avatar`
 									)
 								VALUES (
 									NULL,
 									'$tpl_login',
 									'$registr_date',
-									'$tpl_password',
+									'$pass_hash',
 									'$tpl_email',
 									'2',
-									'$tpl_security',
+									'$salt',
 									'$tpl_first_name',
-									'$tpl_last_name')";
+									'$tpl_last_name',
+									'./images/avatars/default.jpg'
+									)";
 									
-		//echo '<br>'.$sql.'<br>';
+		echo '<br>'.$sql.'<br>';
 		mysql_query($sql, $lnk);
+		
 		$error = mysql_errno($lnk);
+		echo mysql_errno($lnk).":".mysql_error($lnk);
 		}
 		else
 		{
