@@ -7,6 +7,11 @@ require_once('includes/authorization.php');
 echo '<a href="view_forums.php">View forums</a>'.'<br/>'; 
 echo '<a href="login_page.php">Login</a>'.'<br/>';
 echo '<a href="login_page.php?act=logout">Logout</a>'.'<br/>';
+
+echo '<a href="Rules.php">Rules</a>'.'<br/>'; 
+echo '<a href="User_reg.php">Registration</a>'.'<br/>'; 
+echo '<a href="User_page.php">Preferences</a>'.'<br/>'; 
+
 exit();
 
 if (User::getInstance()->isAdmin()) {

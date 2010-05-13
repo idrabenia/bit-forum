@@ -1,4 +1,12 @@
-<?php
+﻿<?php
+	header('Content-type: text/html; charset=utf-8');
+
+	require_once ("common.php");
+	
+	//----------------------------------GET TEMPLATES-----------------------------------//
+	$main_tpl = file_get_contents('./templates/main.tpl');//Common template for all pages
+	$user_page_tpl = file_get_contents('./templates/User/user_page.tpl');//Registration form
+	
 
 	$lnk = mysql_connect('127.0.0.1', 'root', '1') or die ('could not connect');
 	mysql_select_db('bit_forum', $lnk) or die ('no connection');
@@ -21,20 +29,13 @@
 		
 		return $tpl;
 	} 
-	
-	
-	
-	
-	$user_page = file_get_contents('user_page.tpl');
-	
-	$id = 53;
+		
+	$id = 11;
 	$sql = "SELECT * FROM users WHERE usr_id = $id";
 	$r = mysql_query($sql, $lnk);
-		
+	// echo '<br>'.$sql.'<br>';	
 	$row = mysql_fetch_assoc($r);
-	
-	
-	
+	// echo mysql_errno($lnk).":".mysql_error($lnk);
 	
 	if ($_POST)
 	{
@@ -84,6 +85,12 @@
 	$row = mysql_fetch_assoc($r);
 	
 	$out_tpl = '';
-	$out_tpl = $out_tpl.get_form($user_page, $row);
-	echo $out_tpl;
+	$out_tpl = $out_tpl.get_form($user_page_tpl, $row);
+		
+	$main_tpl = str_replace('{TITLE}',"БИТ-форум - Настройки пользователя",$main_tpl);
+	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
+	$main_tpl = str_replace('{BODY}', $out_tpl, $main_tpl);
+	
+	echo $main_tpl;
+		
 ?>

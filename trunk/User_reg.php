@@ -1,14 +1,24 @@
-<?php
+﻿<?php
 	header('Content-type: text/html; charset=utf-8');
+
+	require_once ("common.php");
+	
+	//----------------------------------GET TEMPLATES-----------------------------------//
+	$main_tpl = file_get_contents('./templates/main.tpl');//Common template for all pages
+	$reg_tpl = file_get_contents('./templates/User/user_reg.tpl');//Registration form
+	
 	
 	$lnk = mysql_connect('127.0.0.1', 'root', '1') or die ('could not connect');
 	mysql_select_db('bit_forum', $lnk) or die ('no connection');
 	
-	$user_tpl_empty = file_get_contents('user_reg_empty.tpl');
 	
-	echo $user_tpl_empty;
+	$main_tpl = str_replace('{TITLE}',"БИТ-форум - Регистрация",$main_tpl);
+	$main_tpl = str_replace('{ROOT_PATH}', ROOT_PATH, $main_tpl);
+	$main_tpl = str_replace('{BODY}', $reg_tpl, $main_tpl);
+	
+	echo $main_tpl;
 		
-	if ($_POST)
+	if (isset($_POST["in_login"]))
 	{
 		$tpl_login		=$_POST["in_login"];
 		$tpl_email 		=$_POST["in_email"];
@@ -21,7 +31,7 @@
 		
 		if ($tpl_password==$tpl_confirm)
 		{
-		$sql = "INSERT INTO users (
+		 $sql = "INSERT INTO users (
 									`usr_id`,
 									`usr_login`,
 									`usr_registr_date`,
