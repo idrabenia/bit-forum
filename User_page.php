@@ -26,11 +26,12 @@
 		$tpl = str_replace('{IN_COUNTRY}',$row["usr_country"], $tpl);
 		$tpl = str_replace('{IN_INTERESTS}',$row["usr_interests"], $tpl);
 		$tpl = str_replace('{IN_ABOUT}',$row["usr_about"], $tpl);
+		$tpl = str_replace('{IN_IMAGE}',$row["usr_avatar"], $tpl);
 		
 		return $tpl;
 	} 
 		
-	$id = 11;
+	$id = 23;
 	$sql = "SELECT * FROM users WHERE usr_id = $id";
 	$r = mysql_query($sql, $lnk);
 	// echo '<br>'.$sql.'<br>';	
