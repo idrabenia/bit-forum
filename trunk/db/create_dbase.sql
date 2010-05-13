@@ -3,16 +3,16 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Апр 27 2010 г., 15:53
+-- Время создания: Май 13 2010 г., 21:23
 -- Версия сервера: 5.1.30
 -- Версия PHP: 5.3.0
+
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 DROP DATABASE IF EXISTS `bit_forum`;
 CREATE DATABASE `bit_forum`;
 USE `bit_forum`;
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `pst_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'post id',
   `pst_sender` int(11) NOT NULL COMMENT 'post sender from users',
   `pst_topic` int(11) NOT NULL COMMENT 'topic where this post is from topics',
-  `pst_time` INT NOT NULL COMMENT 'time',
+  `pst_time` int(11) NOT NULL COMMENT 'time',
   `pst_text` text NOT NULL COMMENT 'text of post',
   PRIMARY KEY (`pst_id`),
   KEY `pst_sender` (`pst_sender`,`pst_topic`),
@@ -120,12 +120,9 @@ CREATE TABLE IF NOT EXISTS `post` (
 --
 
 INSERT INTO `post` (`pst_id`, `pst_sender`, `pst_topic`, `pst_time`, `pst_text`) VALUES
-(1, 1, 1, UNIX_TIMESTAMP('2007-11-30 00:00:00'), 
-  'Hard life Hard life Hard life Hard life Hard life Hard life '
-  'Hard life Hard life Hard life Hard life '),
-(2, 1, 1, UNIX_TIMESTAMP('2007-11-30 00:00:05'), 'ggggggggggggggggggggggggggggg'),
-(3, 1, 3, UNIX_TIMESTAMP('2007-11-30 00:00:06'),
-  'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
+(1, 1, 1, 1196373600, 'Hard life Hard life Hard life Hard life Hard life Hard life Hard life Hard life Hard life Hard life '),
+(2, 1, 1, 1196373605, 'ggggggggggggggggggggggggggggg'),
+(3, 1, 3, 1196373606, 'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
 
 -- --------------------------------------------------------
 
@@ -242,22 +239,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usr_interests` text COMMENT 'user''s interests, hobbies',
   `usr_about` text COMMENT 'few words about user',
   `usr_country` text COMMENT 'user''s country',
+  `usr_avatar` varchar(45) NOT NULL,
   PRIMARY KEY (`usr_id`),
   UNIQUE KEY `usr_login_ind` (`usr_login`) USING BTREE,
   UNIQUE KEY `usr_password_hash_ind` (`usr_password_hash`) USING BTREE,
   KEY `usr_id_ind` (`usr_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='User information' AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='User information' AUTO_INCREMENT=24 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`usr_id`, `usr_login`, `usr_registr_date`, `usr_password_hash`, `usr_email`, `usr_role`, `usr_security_salt`, `usr_icq`, `usr_url`, `usr_first_name`, `usr_last_name`, `usr_mobile`, `usr_interests`, `usr_about`, `usr_country`) VALUES
-(1, 'root', 1286220180, 'a4de5937ba273624e21a9bb17ecf3ffb6711ba9e', '', 3, 'qkdu', '', '', '', '', '', '', '', ''),
-(2, 'test1', 1262560462, 'eadc2450abde4fca24fee8f608d2857cd4147e88', '', 2, 'sdf', '', '', '', '', '', '', '', ''),
-(3, 'new_login', 20021020, '123456787654321', 'email', 2, 'abc', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'new_logi', 2002102, '12345677654321', 'emai', 2, 'abc', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 'in_login', 20021012, '1234567654321', 'emailo', 2, 'abc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`usr_id`, `usr_login`, `usr_registr_date`, `usr_password_hash`, `usr_email`, `usr_role`, `usr_security_salt`, `usr_icq`, `usr_url`, `usr_first_name`, `usr_last_name`, `usr_mobile`, `usr_interests`, `usr_about`, `usr_country`, `usr_avatar`) VALUES
+(1, 'root', 1286220180, 'a4de5937ba273624e21a9bb17ecf3ffb6711ba9e', '', 3, 'qkdu', '', '', '', '', '', '', '', '', ''),
+(2, 'test1', 1262560462, 'eadc2450abde4fca24fee8f608d2857cd4147e88', '', 2, 'sdf', '', '', '', '', '', '', '', '', ''),
+(20, 'test2', 1273772771, 'baec485a5c517708378233ea257a7675121b2c2f', 'test2@mail.ru', 2, 'test2@mail.ru', NULL, NULL, 'test2name', 'test2surname', NULL, NULL, NULL, NULL, ''),
+(21, 'test3', 1273773408, 'ebdb708319db1bbe915cf0d939a37edea4873fee', 'test3@mail.ru', 2, '2547546816', NULL, NULL, 'test3name', 'test3surname', NULL, NULL, NULL, NULL, ''),
+(22, 'test5', 1273774273, 'ecd9b990e5f55c0a91c1ef11cf39b59d9c55b194', 'test5@mail.ru', 2, '2547548546', NULL, NULL, 'name1', 'name2', NULL, NULL, NULL, NULL, './images/avatars/defalut.jpg'),
+(23, 'test6', 1273774441, '87930489360bcb6b6dfd2f3d6490895275b3d285', 'test6@mail.ru', 2, '2547548882', NULL, NULL, 'name1', 'name2', NULL, NULL, NULL, NULL, './images/avatars/default.jpg');
 
 -- --------------------------------------------------------
 
@@ -322,174 +321,3 @@ ALTER TABLE `topics`
 --
 ALTER TABLE `warning`
   ADD CONSTRAINT `warning_ibfk_1` FOREIGN KEY (`war_uid`) REFERENCES `users` (`usr_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  
-DELIMITER $$
-
-
-/**
- * Function for registrate user at forum.
- * Example:
- * SELECT REGISTRATE_USER('login2', 'password2', 'email2', 2)
- * For check login and password used settings from table 'config'
- * (ex. min password size, max login size, password complexity)
- *
- * If user successfully registered function return 'OK'
- * otherwise return error message.
- *
- * @author Ilya G. Drobenya
- */
-DROP FUNCTION IF EXISTS `REGISTRATE_USER` $$
-CREATE FUNCTION `REGISTRATE_USER`(
-  login VARCHAR(150), passw VARCHAR(100),
-  email TEXT, role INT) RETURNS VARCHAR(150)
-  COMMENT 'Function for registrate user on forum'
-BEGIN
-  DECLARE new_salt VARCHAR(100);
-  DECLARE passw_hash VARCHAR(100);
-  DECLARE check_message VARCHAR(150);
-
-  -- 1062 -- is error code for value duplication error
-  DECLARE EXIT HANDLER FOR 1062
-    RETURN 'Identical login exists in database';
-
-  /* Generate password hash and security salt */
-  SET new_salt = SHA1( RAND() );
-  SET passw_hash = SHA1( CONCAT(SHA1(passw), new_salt) );
-
-  /* Insert new user data into database */
-  SET check_message = CHECK_ARGUMENTS(login, passw);
-  IF check_message <> 'OK' THEN
-    RETURN check_message;
-  ELSEIF role <> 2 THEN
-    RETURN 'User role must be set to registered user (2)';
-  ELSE
-    INSERT INTO `users` (`usr_login`, `usr_registr_date`, `usr_password_hash`,
-      `usr_email`, `usr_role`, `usr_security_salt`)
-    VALUES
-      (login, UNIX_TIMESTAMP(), passw_hash, email, role, new_salt);
-
-    RETURN 'OK';
-  END IF;
-
-END $$
-
-
-/**
- * Function for validate login and password.
- *
- * If login and password correct function return 'OK'
- * otherwise returns error message.
- *
- * @author Ilya G. Drobenya
- */
-DROP FUNCTION IF EXISTS `CHECK_ARGUMENTS` $$
-CREATE FUNCTION `CHECK_ARGUMENTS`(login VARCHAR(100),
-  passw VARCHAR(150)) RETURNS VARCHAR(150)
-BEGIN
-  DECLARE MIN_LOGIN_SIZE INT;
-  DECLARE MAX_LOGIN_SIZE INT;
-
-  DECLARE MIN_PASSW_SIZE INT;
-  DECLARE MAX_PASSW_SIZE INT;
-
-  DECLARE complex_check_msg VARCHAR(100);
-
-  /* Select constants for check arguments */
-  SELECT `param_value` INTO MIN_PASSW_SIZE FROM `config`
-    WHERE `param_name` = 'MIN_PASSWORD_SIZE';
-
-  SELECT `param_value` INTO MAX_PASSW_SIZE FROM `config`
-    WHERE `param_name` = 'MAX_PASSWORD_SIZE';
-
-  SELECT `param_value` INTO MIN_LOGIN_SIZE FROM `config`
-    WHERE `param_name` = 'MIN_LOGIN_SIZE';
-
-  SELECT `param_value` INTO MAX_LOGIN_SIZE FROM `config`
-    WHERE `param_name` = 'MAX_LOGIN_SIZE';
-
-  /* Validate password and login */
-  SET complex_check_msg = CHECK_PASSWORD_COMPLEXITY(passw);
-
-  IF complex_check_msg <> 'OK' THEN
-    RETURN complex_check_msg;
-
-  ELSEIF LENGTH(passw) < MIN_PASSW_SIZE THEN
-    RETURN CONCAT('Password length must be greate than ', MIN_PASSW_SIZE);
-
-  ELSEIF LENGTH(passw) > MAX_PASSW_SIZE THEN
-    RETURN CONCAT('Password length must be less than ', MAX_PASSW_SIZE);
-
-  ELSEIF LENGTH(login) < MIN_LOGIN_SIZE THEN
-    RETURN CONCAT('Login length must be greate than ', MIN_LOGIN_SIZE);
-
-  ELSEIF LENGTH(login) > MAX_LOGIN_SIZE THEN
-    RETURN CONCAT('Login length must be less than ', MAX_LOGIN_SIZE);
-
-  ELSE
-    RETURN 'OK';
-
-  END IF;
-
-END $$
-
-
-/**
- * Function for check password complexity.
- * Password complexity settings holdes in table
- * 'config'. It may have next values:
- *      NO_PASSW_COMPLEX -- no limitation on password complexity
- *      DIGIT_PASSW_COMPLEX -- password must contain digits
- *      REGISTER_PASSW_COMPLEX -- must contain upper case latin chars
- *      DIGIT_REGISTER_PASSW_COMPLEX -- must contain digits and upper
- *                                      case latin chars
- *
- * If password valid function return 'OK'
- * otherwise returns error message.
- *
- * @author Ilya G. Drobenya
- */
-DROP FUNCTION IF EXISTS `CHECK_PASSWORD_COMPLEXITY` $$
-CREATE FUNCTION `CHECK_PASSWORD_COMPLEXITY`(
-  passw VARCHAR(150)) RETURNS VARCHAR(150)
-BEGIN
-  DECLARE COMPLEXITY VARCHAR(50);
-  DECLARE check_message VARCHAR(100);
-
-  /* Fetch complexity settings from database */
-  SELECT `param_value` INTO COMPLEXITY FROM `config`
-    WHERE `param_name` = 'PASSW_COMPLEXITY';
-
-  /* Check execution of complexity for current password */
-  CASE COMPLEXITY
-    WHEN 'NO_PASSW_COMPLEX' THEN RETURN 'OK';
-
-    WHEN 'DIGIT_PASSW_COMPLEX' THEN
-      IF passw REGEXP BINARY '[0-9]' = 1 THEN
-        RETURN 'OK';
-      ELSE
-        RETURN 'Password must have digits';
-      END IF;
-
-    WHEN 'REGISTER_PASSW_COMPLEX' THEN
-      IF passw REGEXP BINARY '[A-Z]' = 1 THEN
-        RETURN 'OK';
-      ELSE
-        RETURN 'Password must contain latin characters in upper case';
-      END IF;
-
-    WHEN 'DIGIT_REGISTER_PASSW_COMPLEX' THEN
-      IF (passw REGEXP BINARY '[A-Z]' = 1)
-          AND (passw REGEXP BINARY '[0-9]' = 1) THEN
-        RETURN 'OK';
-      ELSE
-        RETURN 'Password must contain latin characters in upper case '
-               'and digits';
-      END IF;
-
-    ELSE
-      RETURN 'Error in database';
-  END CASE;
-
-END $$
-
-DELIMITER ;
